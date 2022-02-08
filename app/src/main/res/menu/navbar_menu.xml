@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/group_menu"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@drawable/ic_baseline_account_circle_24"
+            android:title="Account" />
+        <item
+            android:id="@+id/nav_participant"
+            android:icon="@drawable/ic_baseline_people_outline_24"
+            android:title="Participant" />
+        <item
+            android:id="@+id/nav_instructor"
+            android:icon="@drawable/ic_baseline_school_24"
+            android:title="Instructor" />
+        <item
+            android:id="@+id/nav_subject"
+            android:icon="@drawable/ic_baseline_collections_bookmark_24"
+            android:title="Subject" />
+        <item
+            android:id="@+id/nav_class"
+            android:icon="@drawable/ic_baseline_class_24"
+            android:title="Class" />
+    </group>
+</menu>
