@@ -2,8 +2,11 @@ package com.jeimandei.projectone;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
@@ -12,8 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.hbb20.CountryCodePicker;
@@ -21,6 +27,8 @@ import com.hbb20.CountryCodePicker;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,10 +47,12 @@ public class AccountFragment extends Fragment {
     private String mParam2;
 
     private EditText name, email, phonenumber, birthday;
+
     private CountryCodePicker phnum;
     private RadioGroup gender;
     private RadioButton chk_gender;
     private FloatingActionButton save;
+    private CircleImageView image;
     final Calendar calendar = Calendar.getInstance();
 
 
@@ -78,19 +88,45 @@ public class AccountFragment extends Fragment {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        Uri selectedImageUri = data.getData();
+        if (null != selectedImageUri) {
+            String path = selectedImageUri.getPath();
+            image.setImageURI(selectedImageUri);
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_account, container, false);
-        name = (EditText) viewGroup.findViewById(R.id.acc_name);
-        email = (EditText) viewGroup.findViewById(R.id.acc_email);
-        phnum = (CountryCodePicker) viewGroup.findViewById(R.id.acc_phCountry);
-        phonenumber = (EditText) viewGroup.findViewById(R.id.acc_phone);
+        image = viewGroup.findViewById(R.id.image);
+        name = viewGroup.findViewById(R.id.acc_name);
+        email = viewGroup.findViewById(R.id.acc_email);
+        phnum = viewGroup.findViewById(R.id.acc_phCountry);
+        phonenumber = viewGroup.findViewById(R.id.acc_phone);
         phnum.registerCarrierNumberEditText(phonenumber);
-        gender = (RadioGroup) viewGroup.findViewById(R.id.acc_gender);
-        birthday = (EditText) viewGroup.findViewById(R.id.acc_birthday);
-        save = (FloatingActionButton) viewGroup.findViewById(R.id.acc_save);
+        gender = viewGroup.findViewById(R.id.acc_gender);
+        birthday = viewGroup.findViewById(R.id.acc_birthday);
+        save = viewGroup.findViewById(R.id.acc_save);
 
+
+
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 5);
+            }
+        });
+
+
+
+    
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int y, int m, int d) {
@@ -111,7 +147,8 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 int selectedId = gender.getCheckedRadioButtonId();
-                chk_gender = (RadioButton) viewGroup.findViewById(selectedId);
+                chk_gender = viewGroup.findViewById(selectedId);
+
                 saveDialog();
             }
         });

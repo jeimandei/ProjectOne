@@ -15,19 +15,22 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <ImageButton
-            android:id="@+id/imageButton"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:src="@drawable/ic_baseline_account_circle_24"
-            android:tooltipText="Add Picture" />
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/black"
+            android:paddingBottom="8dp"/>
 
         <EditText
             android:id="@+id/acc_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Name"
-            android:paddingTop="24dp" />
+            android:paddingTop="24dp"
+            android:inputType="text"/>
 
         <EditText
             android:id="@+id/acc_email"
@@ -35,7 +38,8 @@
             android:layout_height="wrap_content"
             android:hint="Enter Email"
             android:inputType="textEmailAddress"
-            android:paddingTop="12dp" />
+            android:paddingTop="12dp"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,7 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="9"
-                android:hint="Phone Number" />
+                android:hint="Phone Number"
+                android:inputType="phone"/>
         </LinearLayout>
 
         <LinearLayout
@@ -102,7 +107,8 @@
             android:id="@+id/acc_birthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Birthday" />
+            android:hint="Birthday"
+            android:inputType="date"/>
 
     </LinearLayout>
 
@@ -113,6 +119,6 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@android:drawable/ic_menu_save" />
 
 </FrameLayout>
