@@ -23,11 +23,11 @@
             android:tooltipText="Add Picture" />
 
         <EditText
-            android:paddingTop="24dp"
             android:id="@+id/acc_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Name" />
+            android:hint="Enter Name"
+            android:paddingTop="24dp" />
 
         <EditText
             android:id="@+id/acc_email"
@@ -85,7 +85,8 @@
                     android:id="@+id/acc_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Male" />
+                    android:text="Male"
+                    android:checked="true"/>
 
                 <RadioButton
                     android:id="@+id/acc_female"
@@ -101,17 +102,17 @@
             android:id="@+id/acc_birthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Birthday"/>
+            android:hint="Birthday" />
 
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/acc_save"
-        android:layout_gravity="bottom|end"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
 </FrameLayout>

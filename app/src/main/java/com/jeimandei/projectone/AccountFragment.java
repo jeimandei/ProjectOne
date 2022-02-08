@@ -1,5 +1,6 @@
 package com.jeimandei.projectone;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -9,12 +10,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.hbb20.CountryCodePicker;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,10 +39,12 @@ public class AccountFragment extends Fragment {
     private String mParam2;
 
     private EditText name, email, phonenumber, birthday;
-    private CountryCodePicker country;
+    private CountryCodePicker phnum;
     private RadioGroup gender;
-    private RadioButton male, female;
+    private RadioButton chk_gender;
     private FloatingActionButton save;
+    final Calendar calendar = Calendar.getInstance();
+
 
     public AccountFragment() {
         // Required empty public constructor
@@ -75,12 +83,35 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_account, container, false);
         name = (EditText) viewGroup.findViewById(R.id.acc_name);
+        email = (EditText) viewGroup.findViewById(R.id.acc_email);
+        phnum = (CountryCodePicker) viewGroup.findViewById(R.id.acc_phCountry);
+        phonenumber = (EditText) viewGroup.findViewById(R.id.acc_phone);
+        phnum.registerCarrierNumberEditText(phonenumber);
+        gender = (RadioGroup) viewGroup.findViewById(R.id.acc_gender);
+        birthday = (EditText) viewGroup.findViewById(R.id.acc_birthday);
         save = (FloatingActionButton) viewGroup.findViewById(R.id.acc_save);
 
-        birthday = (EditText) viewGroup.findViewById(R.id.acc_birthday)
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int y, int m, int d) {
+                calendar.set(Calendar.YEAR, y);
+                calendar.set(Calendar.MONTH, m);
+                calendar.set(Calendar.DAY_OF_MONTH, d);
+                updateText();
+            }
+        };
+        birthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(viewGroup.getContext(), date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int selectedId = gender.getCheckedRadioButtonId();
+                chk_gender = (RadioButton) viewGroup.findViewById(selectedId);
                 saveDialog();
             }
         });
@@ -88,11 +119,17 @@ public class AccountFragment extends Fragment {
         return viewGroup;
     }
 
+    private void updateText() {
+        String date = "dd/MM/YYYY";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(date, Locale.ENGLISH);
+        birthday.setText(dateFormat.format(calendar.getTime()));
+    }
+
     private void saveDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setTitle("Hello, " + name.getText());
-        alertDialog.setMessage("Are you sure?");
-        alertDialog.setIcon(getResources().getDrawable(android.R.drawable.ic_delete));
+        alertDialog.setMessage("Here's your personal Information, \n\nEmail: \t\t\t" + email.getText() + "\n\nDOB: \t\t\t\t" + birthday.getText() + "\n\nPhone: \t\t" + phnum.getFormattedFullNumber() + "\n\nGender: \t" + chk_gender.getText());
+        alertDialog.setIcon(getResources().getDrawable(R.drawable.ic_baseline_emoji_people_24));
         alertDialog.setCancelable(false);
         alertDialog.setNegativeButton("Cancel", null);
         alertDialog.setPositiveButton("Sure", null);
