@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/lv_instructor_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="ID"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:padding="8dp"/>
+        <TextView
+            android:id="@+id/lv_instructor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Instructor Name"
+            android:layout_weight="19"
+            android:textSize="18sp"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/lv_instructor_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Instructor Email"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:padding="8dp"/>
+        <TextView
+            android:textAlignment="textEnd"
+            android:id="@+id/lv_instructor_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Instructor Phone"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>

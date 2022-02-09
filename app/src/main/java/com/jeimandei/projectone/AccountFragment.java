@@ -111,9 +111,6 @@ public class AccountFragment extends Fragment {
         birthday = viewGroup.findViewById(R.id.acc_birthday);
         save = viewGroup.findViewById(R.id.acc_save);
 
-
-
-
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,9 +121,6 @@ public class AccountFragment extends Fragment {
             }
         });
 
-
-
-    
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int y, int m, int d) {

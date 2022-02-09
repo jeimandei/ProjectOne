@@ -6,9 +6,9 @@
     tools:context=".InstructorFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/lv_instructor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Instructor" />
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

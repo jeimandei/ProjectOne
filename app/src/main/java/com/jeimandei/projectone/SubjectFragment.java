@@ -1,12 +1,25 @@
 package com.jeimandei.projectone;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +36,10 @@ public class SubjectFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private String JSON_STRING;
+    private ViewGroup viewGroup;
+    private ListView lv_part;
 
     public SubjectFragment() {
         // Required empty public constructor
@@ -59,6 +76,86 @@ public class SubjectFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_subject, container, false);
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_subject, container, false);
+
+        lv_part = (ListView) viewGroup.findViewById(R.id.lv_subject);
+        getJSON();
+
+        return viewGroup;
+    }
+
+    private void getJSON() {
+        class GetJSON extends AsyncTask<Void, Void, String> {
+            ProgressDialog progressDialog;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(getContext(), "Getting Data", "Please wait...", false, false);
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                HttpHandler handler = new HttpHandler();
+                String result = handler.sendGetResp(Config.URL_GET_ALL_SUBJECT);
+                Log.d("GetData", result);
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        progressDialog.dismiss();
+                    }
+                }, 2000);
+
+                JSON_STRING = s;
+                Log.d("Data_JSON", JSON_STRING);
+
+                displayAllParticipant();
+            }
+        }
+        GetJSON getJSON = new GetJSON();
+        getJSON.execute();
+    }
+
+    private void displayAllParticipant() {
+        JSONObject jsonObject = null;
+        ArrayList<HashMap<String, String>> arrayList = new ArrayList<HashMap<String, String>>();
+
+        try {
+            jsonObject = new JSONObject(JSON_STRING);
+            JSONArray jsonArray = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY_SUBJECT);
+            Log.d("Data_JSON_LIST: ", String.valueOf(jsonArray));
+
+
+            for (int i=0;i<jsonArray.length(); i++){
+                JSONObject object = jsonArray.getJSONObject(i);
+                String id = object.getString(Config.TAG_JSON_ID_SUBJECT);
+                String name = object.getString(Config.TAG_JSON_NAME_SUBJECT);
+
+                HashMap<String, String> subject = new HashMap<>();
+                subject.put(Config.TAG_JSON_ID_SUBJECT, id);
+                subject.put(Config.TAG_JSON_NAME_SUBJECT, name);
+
+                arrayList.add(subject);
+                Log.d("DataArr: ", String.valueOf(subject));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        ListAdapter adapter = new SimpleAdapter(
+                viewGroup.getContext(), arrayList, R.layout.lv_subject,
+                new String[] {Config.TAG_JSON_ID_SUBJECT, Config.TAG_JSON_NAME_SUBJECT},
+                new int[] {R.id.lv_subject_id, R.id.lv_subject_name}
+        );
+        Log.d("DataArray: ", String.valueOf(adapter));
+        lv_part.setAdapter(adapter);
     }
 }

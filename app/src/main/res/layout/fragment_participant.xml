@@ -6,9 +6,9 @@
     tools:context=".ParticipantFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/lv_participant"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Participant" />
+        android:layout_height="match_parent"/>
 
 </FrameLayout>
