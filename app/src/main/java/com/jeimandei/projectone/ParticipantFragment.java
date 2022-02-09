@@ -1,11 +1,13 @@
 package com.jeimandei.projectone;
 
 import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.util.Log;
@@ -22,7 +24,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import com.jeimandei.projectone.databinding.FragmentParticipantBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,8 +85,10 @@ public class ParticipantFragment extends Fragment{
         lv_part = (ListView) viewGroup.findViewById(R.id.lv_participant);
         getJSON();
 
+
         return viewGroup;
     }
+
 
     private void getJSON() {
         class GetJSON extends AsyncTask<Void, Void, String> {
@@ -164,5 +167,29 @@ public class ParticipantFragment extends Fragment{
         );
         Log.d("DataArray: ", String.valueOf(adapter));
         lv_part.setAdapter(adapter);
+
+
+        lv_part.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Bundle bundle = new Bundle();
+                ParticipantDetailFragment participantDetailFragment = new ParticipantDetailFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.framelayout,participantDetailFragment);
+
+
+                HashMap<String, String> map = (HashMap) adapterView.getItemAtPosition(i);
+                String participantid = map.get(Config.TAG_JSON_ID_PARTICIPANT).toString();
+                Bundle args = new Bundle();
+                args.putString("id", participantid);
+                participantDetailFragment.setArguments(args);
+
+
+
+                Log.d("Par: ", String.valueOf(args));
+                fragmentTransaction.commit();
+            }
+        });
     }
 }

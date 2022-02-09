@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CompanyDetailFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:id="@+id/detail_participant"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/detail_id_company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:hint="Company ID" />
+
+        <EditText
+            android:id="@+id/detail_name_company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Company Name" />
+
+        <EditText
+            android:id="@+id/detail_address_company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Company Address" />
+
+    </LinearLayout>
+
+</FrameLayout>

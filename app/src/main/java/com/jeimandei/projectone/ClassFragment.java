@@ -5,12 +5,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -77,6 +80,7 @@ public class ClassFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_class, container, false);
+
 
         lv_part = (ListView) viewGroup.findViewById(R.id.lv_class);
         getJSON();
@@ -159,5 +163,27 @@ public class ClassFragment extends Fragment {
         );
         Log.d("DataArray: ", String.valueOf(adapter));
         lv_part.setAdapter(adapter);
+        lv_part.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Bundle bundle = new Bundle();
+                ClassDetailFragment classDetailFragment = new ClassDetailFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.framelayout,classDetailFragment);
+
+
+                HashMap<String, String> map = (HashMap) adapterView.getItemAtPosition(i);
+                String classid = map.get(Config.TAG_JSON_ID_CLASS).toString();
+                Bundle args = new Bundle();
+                args.putString("id", classid);
+                classDetailFragment.setArguments(args);
+
+
+
+                Log.d("Par: ", String.valueOf(args));
+                fragmentTransaction.commit();
+            }
+        });
     }
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ClassDetailFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/detail_id_class"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Class ID"
+            android:editable="false"/>
+        <EditText
+            android:id="@+id/detail_class_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Class Start"
+            android:clickable="false"/>
+        <EditText
+            android:id="@+id/detail_class_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Class End"
+            android:clickable="false"
+            android:inputType="textEmailAddress"/>
+        <EditText
+            android:id="@+id/detail_class_instructor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Class Instructor"
+            android:clickable="false"/>
+        <EditText
+            android:id="@+id/detail_class_subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Class Subject"
+            android:clickable="false"/>
+
+    </LinearLayout>
+
+</FrameLayout>

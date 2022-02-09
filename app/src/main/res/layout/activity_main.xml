@@ -19,7 +19,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/holo_blue_light"
+                android:background="#94DAFF"
                 android:minHeight="?attr/actionBarSize"
                 app:title="Project One"
                 app:titleTextColor="@color/white" />

@@ -12,6 +12,10 @@
             android:icon="@drawable/ic_baseline_people_outline_24"
             android:title="Participant" />
         <item
+            android:id="@+id/nav_company"
+            android:icon="@drawable/ic_baseline_location_city_24"
+            android:title="Company" />
+        <item
             android:id="@+id/nav_instructor"
             android:icon="@drawable/ic_baseline_school_24"
             android:title="Instructor" />

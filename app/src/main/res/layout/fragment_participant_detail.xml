@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ParticipantDetailFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/detail_id_participant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Participant ID"
+            android:editable="false"/>
+        <EditText
+            android:id="@+id/detail_name_participant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Participant Name"
+            android:clickable="false"/>
+        <EditText
+            android:id="@+id/detail_email_participant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Participant Email"
+            android:clickable="false"
+            android:inputType="textEmailAddress"/>
+        <EditText
+            android:id="@+id/detail_phone_participant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Participant Phone Number"
+            android:clickable="false"
+            android:inputType="phone"/>
+        <EditText
+            android:id="@+id/detail_company_participant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Participant Company"
+            android:clickable="false"/>
+
+    </LinearLayout>
+
+</FrameLayout>

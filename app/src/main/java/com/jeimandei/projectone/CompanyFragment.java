@@ -18,8 +18,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -28,10 +26,10 @@ import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SubjectFragment#newInstance} factory method to
+ * Use the {@link CompanyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SubjectFragment extends Fragment {
+public class CompanyFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,9 +43,9 @@ public class SubjectFragment extends Fragment {
     private String JSON_STRING;
     private ViewGroup viewGroup;
     private ListView lv_part;
-    private FloatingActionButton add;
 
-    public SubjectFragment() {
+
+    public CompanyFragment() {
         // Required empty public constructor
     }
 
@@ -57,11 +55,11 @@ public class SubjectFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SubjectFragment.
+     * @return A new instance of fragment CompanyFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SubjectFragment newInstance(String param1, String param2) {
-        SubjectFragment fragment = new SubjectFragment();
+    public static CompanyFragment newInstance(String param1, String param2) {
+        CompanyFragment fragment = new CompanyFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -81,24 +79,11 @@ public class SubjectFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_subject, container, false);
-        add = viewGroup.findViewById(R.id.subject_save);
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_company, container, false);
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddSubjectFragment addSubjectFragment = new AddSubjectFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.framelayout,addSubjectFragment);
-                callFragment(addSubjectFragment);
-                fragmentTransaction.commit();
-            }
-        });
-
-        lv_part = (ListView) viewGroup.findViewById(R.id.lv_subject);
+        lv_part = (ListView) viewGroup.findViewById(R.id.lv_company);
         getJSON();
+
 
         return viewGroup;
     }
@@ -116,7 +101,7 @@ public class SubjectFragment extends Fragment {
             @Override
             protected String doInBackground(Void... voids) {
                 HttpHandler handler = new HttpHandler();
-                String result = handler.sendGetResp(Config.URL_GET_ALL_SUBJECT);
+                String result = handler.sendGetResp(Config.URL_GET_ALL_COMPANY);
                 Log.d("GetData", result);
                 return result;
             }
@@ -148,21 +133,23 @@ public class SubjectFragment extends Fragment {
 
         try {
             jsonObject = new JSONObject(JSON_STRING);
-            JSONArray jsonArray = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY_SUBJECT);
+            JSONArray jsonArray = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY_COMPANY);
             Log.d("Data_JSON_LIST: ", String.valueOf(jsonArray));
 
 
             for (int i=0;i<jsonArray.length(); i++){
                 JSONObject object = jsonArray.getJSONObject(i);
-                String id = object.getString(Config.TAG_JSON_ID_SUBJECT);
-                String name = object.getString(Config.TAG_JSON_NAME_SUBJECT);
+                String id = object.getString(Config.TAG_JSON_ID_COMPANY);
+                String name = object.getString(Config.TAG_JSON_NAME_COMPANY);
+                String address = object.getString(Config.TAG_JSON_ADDRESS_COMPANY);
 
-                HashMap<String, String> subject = new HashMap<>();
-                subject.put(Config.TAG_JSON_ID_SUBJECT, id);
-                subject.put(Config.TAG_JSON_NAME_SUBJECT, name);
+                HashMap<String, String> company = new HashMap<>();
+                company.put(Config.TAG_JSON_ID_COMPANY, id);
+                company.put(Config.TAG_JSON_NAME_COMPANY, name);
+                company.put(Config.TAG_JSON_ADDRESS_COMPANY, address);
 
-                arrayList.add(subject);
-                Log.d("DataArr: ", String.valueOf(subject));
+                arrayList.add(company);
+                Log.d("DataArr: ", String.valueOf(company));
             }
 
         }catch (Exception e){
@@ -170,29 +157,29 @@ public class SubjectFragment extends Fragment {
         }
 
         ListAdapter adapter = new SimpleAdapter(
-                viewGroup.getContext(), arrayList, R.layout.lv_subject,
-                new String[] {Config.TAG_JSON_ID_SUBJECT, Config.TAG_JSON_NAME_SUBJECT},
-                new int[] {R.id.lv_subject_id, R.id.lv_subject_name}
+                viewGroup.getContext(), arrayList, R.layout.lv_company,
+                new String[] {Config.TAG_JSON_ID_COMPANY, Config.TAG_JSON_NAME_COMPANY, Config.TAG_JSON_ADDRESS_COMPANY},
+                new int[] {R.id.lv_company_id, R.id.lv_company_name, R.id.lv_company_address}
         );
         Log.d("DataArray: ", String.valueOf(adapter));
         lv_part.setAdapter(adapter);
+
 
         lv_part.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Bundle bundle = new Bundle();
-                SubjectDetailFragment subjectDetailFragment = new SubjectDetailFragment();
+                CompanyDetailFragment companyDetailFragment = new CompanyDetailFragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.framelayout,subjectDetailFragment);
-                callFragment(subjectDetailFragment);
+                fragmentTransaction.replace(R.id.framelayout,companyDetailFragment);
 
 
                 HashMap<String, String> map = (HashMap) adapterView.getItemAtPosition(i);
-                String instructorid = map.get(Config.TAG_JSON_ID_SUBJECT).toString();
+                String companyid = map.get(Config.TAG_JSON_ID_COMPANY).toString();
                 Bundle args = new Bundle();
-                args.putString("id", instructorid);
-                subjectDetailFragment.setArguments(args);
+                args.putString("id", companyid);
+                companyDetailFragment.setArguments(args);
 
 
 
@@ -200,16 +187,5 @@ public class SubjectFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
-    }
-    public void callFragment(Fragment fragment) {
-        FragmentManager man = getActivity().getSupportFragmentManager();
-        FragmentTransaction trans = man.beginTransaction();
-        trans.setCustomAnimations(
-                android.R.anim.slide_in_left,
-                android.R.anim.slide_out_right
-        );
-        trans.replace(R.id.framelayout, fragment);
-        trans.addToBackStack(null);
-        trans.commit();
     }
 }
