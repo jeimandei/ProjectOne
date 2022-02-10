@@ -2,10 +2,14 @@ package com.jeimandei.projectone;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,12 +18,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -129,6 +135,75 @@ public class ClassDetailFragment extends Fragment {
             }
         });
 
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String start = c_start.getText().toString().trim();
+                final String end = c_end.getText().toString().trim();
+
+                class UpdateData extends AsyncTask<Void, Void, String>{
+
+                    ProgressDialog loading;
+
+                    @Override
+                    protected void onPreExecute() {
+                        super.onPreExecute();
+                        loading = ProgressDialog.show(getContext(), "Changing Data", "Please Wait...", false, false);
+                    }
+
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        HashMap<String, String> params = new HashMap<>();
+                        params.put(Config.KEY_ID_CLASS, id);
+                        params.put(Config.KEY_START_CLASS, start);
+                        params.put(Config.KEY_END_CLASS, end);
+
+                        Log.d("inputss", String.valueOf(params));
+                        HttpHandler handler = new HttpHandler();
+                        String res = handler.sendPostReq(Config.URL_UPDATE_CLASS, params);
+
+                        return res;
+                    }
+
+                    @Override
+                    protected void onPostExecute(String s) {
+                        super.onPostExecute(s);
+                        loading.dismiss();
+                        Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+
+                        ClassFragment classFragment = new ClassFragment();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.framelayout,classFragment);
+                        fragmentTransaction.commit();
+                    }
+                }
+                UpdateData updateData = new UpdateData();
+                updateData.execute();
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Delete Class?");
+                builder.setMessage("Are you sure?");
+                builder.setIcon(getResources().getDrawable(android.R.drawable.ic_delete));
+                builder.setCancelable(false);
+                builder.setNegativeButton("Cancel", null);
+                builder.setPositiveButton("Sure", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        deleteData();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
+            }
+        });
+
         return view;
     }
 
@@ -194,5 +269,40 @@ public class ClassDetailFragment extends Fragment {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void deleteData() {
+        class Delete extends AsyncTask<Void, Void, String>{
+
+            ProgressDialog loading;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(getContext(), "Deleting Data", "Please Wait...", false, false);
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                HttpHandler handler = new HttpHandler();
+                String res = handler.sendGetResp(Config.URL_DELETE_CLASS, id);
+                return res;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(getContext(), "Participant Deleted!!!", Toast.LENGTH_SHORT).show();
+
+                ClassFragment classFragment = new ClassFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.framelayout,classFragment);
+                fragmentTransaction.commit();
+            }
+        }
+        Delete delete = new Delete();
+        delete.execute();
     }
 }

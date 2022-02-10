@@ -22,28 +22,55 @@
             android:id="@+id/detail_name_participant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Participant Name"
-            android:clickable="false"/>
+            android:hint="Participant Name"/>
         <EditText
             android:id="@+id/detail_email_participant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Participant Email"
-            android:clickable="false"
             android:inputType="textEmailAddress"/>
         <EditText
             android:id="@+id/detail_phone_participant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Participant Phone Number"
-            android:clickable="false"
             android:inputType="phone"/>
         <EditText
             android:id="@+id/detail_company_participant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Participant Company"
-            android:clickable="false"/>
+            android:editable="false"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+        <Button
+            android:id="@+id/update_participant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:padding="12dp"
+            android:layout_weight="1"
+            android:text="Update Participant"
+            android:layout_gravity="bottom"
+            android:backgroundTint="#9AD0EC"/>
+
+        <Button
+            android:id="@+id/delete_participant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:padding="12dp"
+            android:layout_weight="1"
+            android:text="Delete Participant"
+            android:layout_gravity="bottom"
+            android:backgroundTint="#FF7878"/>
 
     </LinearLayout>
 

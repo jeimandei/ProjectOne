@@ -16,14 +16,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AddSubjectFragment#newInstance} factory method to
+ * Use the {@link AddCompanyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddSubjectFragment extends Fragment {
+public class AddCompanyFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,10 +37,10 @@ public class AddSubjectFragment extends Fragment {
     private String mParam2;
 
     private Button add;
-    private EditText s_name;
+    private EditText c_name, c_address;
     private ViewGroup viewGroup;
 
-    public AddSubjectFragment() {
+    public AddCompanyFragment() {
         // Required empty public constructor
     }
 
@@ -48,11 +50,11 @@ public class AddSubjectFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AddSubjectFragment.
+     * @return A new instance of fragment AddCompanyFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddSubjectFragment newInstance(String param1, String param2) {
-        AddSubjectFragment fragment = new AddSubjectFragment();
+    public static AddCompanyFragment newInstance(String param1, String param2) {
+        AddCompanyFragment fragment = new AddCompanyFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -73,15 +75,16 @@ public class AddSubjectFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_add_subject, container, false);
-
-        s_name = viewGroup.findViewById(R.id.add_name_subject);
-        add = viewGroup.findViewById(R.id.add_subject);
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_add_company, container, false);
+        c_name = viewGroup.findViewById(R.id.add_name_company);
+        c_address = viewGroup.findViewById(R.id.add_address_company);
+        add = viewGroup.findViewById(R.id.add_company);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name_s = s_name.getText().toString().trim();
+                String name = c_name.getText().toString().trim();
+                String address = c_address.getText().toString().trim();
 
                 class SaveData extends AsyncTask<Void, Void, String> {
                     ProgressDialog loading;
@@ -95,10 +98,11 @@ public class AddSubjectFragment extends Fragment {
                     @Override
                     protected String doInBackground(Void... voids) {
                         HashMap<String, String> params = new HashMap<>();
-                        params.put(Config.KEY_NAME_SUBJECT, name_s);
+                        params.put(Config.KEY_NAME_COMPANY, name);
+                        params.put(Config.KEY_ADDRESS_COMPANY, address);
                         Log.d("inputss", String.valueOf(params));
                         HttpHandler handler = new HttpHandler();
-                        String res = handler.sendPostReq(Config.URL_ADD_SUBJECT, params);
+                        String res = handler.sendPostReq(Config.URL_ADD_COMPANY, params);
                         return res;
                     }
 
@@ -123,8 +127,10 @@ public class AddSubjectFragment extends Fragment {
 
         return viewGroup;
     }
+
     private void clearText() {
-        s_name.setText("");
-        s_name.requestFocus();
+        c_name.setText("");
+        c_address.setText("");
+        c_name.requestFocus();
     }
 }

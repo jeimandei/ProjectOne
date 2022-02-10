@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InstructorDetailFragment">
+    tools:context=".AddInstructorFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -12,30 +12,28 @@
         android:padding="16dp"
         android:orientation="vertical">
 
+
         <EditText
-            android:id="@+id/detail_id_instructor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Instructor ID"
-            android:editable="false"/>
-        <EditText
-            android:id="@+id/detail_name_instructor"
+            android:id="@+id/add_name_instructor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Instructor Name"
-            android:clickable="false"/>
+            />
         <EditText
-            android:id="@+id/detail_email_instructor"
+            android:id="@+id/add_email_instructor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
             android:hint="Instructor Email"
-            android:inputType="textEmailAddress"/>
+            />
         <EditText
-            android:id="@+id/detail_phone_instructor"
+            android:id="@+id/add_phone_instructor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Instructor Phone Number"
-            android:inputType="phone"/>
+            android:hint="Instructor Phone"
+            android:inputType="phone"
+            />
+
 
     </LinearLayout>
 
@@ -46,26 +44,17 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
         <Button
-            android:id="@+id/update_instructor"
+            android:id="@+id/add_instructor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:padding="12dp"
             android:layout_weight="1"
-            android:text="Update Instructor"
+            android:text="Add Instructor"
             android:layout_gravity="bottom"
             android:backgroundTint="#9AD0EC"/>
 
-        <Button
-            android:id="@+id/delete_instructor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:padding="12dp"
-            android:layout_weight="1"
-            android:text="Delete Instructor"
-            android:layout_gravity="bottom"
-            android:backgroundTint="#FF7878"/>
+
 
     </LinearLayout>
 

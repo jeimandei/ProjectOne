@@ -18,6 +18,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -43,6 +45,7 @@ public class CompanyFragment extends Fragment {
     private String JSON_STRING;
     private ViewGroup viewGroup;
     private ListView lv_part;
+    private FloatingActionButton add;
 
 
     public CompanyFragment() {
@@ -81,7 +84,21 @@ public class CompanyFragment extends Fragment {
                              Bundle savedInstanceState) {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_company, container, false);
 
+        add = viewGroup.findViewById(R.id.company_save);
         lv_part = (ListView) viewGroup.findViewById(R.id.lv_company);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddCompanyFragment addCompanyFragment = new AddCompanyFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.framelayout,addCompanyFragment);
+                callFragment(addCompanyFragment);
+                fragmentTransaction.commit();
+            }
+        });
+
         getJSON();
 
 
@@ -187,5 +204,17 @@ public class CompanyFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+    }
+
+    public void callFragment(Fragment fragment) {
+        FragmentManager man = getActivity().getSupportFragmentManager();
+        FragmentTransaction trans = man.beginTransaction();
+        trans.setCustomAnimations(
+                android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right
+        );
+        trans.replace(R.id.framelayout, fragment);
+        trans.addToBackStack(null);
+        trans.commit();
     }
 }

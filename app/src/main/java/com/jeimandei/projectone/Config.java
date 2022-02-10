@@ -5,8 +5,8 @@ public class Config {
     public static final String URL_GET_ALL_PARTICIPANT = "http://192.168.30.26/project/participant/alldata.php";
     public static final String URL_GET_DETAIL_PARTICIPANT = "http://192.168.30.26/project/participant/detail.php?participant_id=";
     public static final String URL_ADD_PARTICIPANT = "http://192.168.30.26/project/participant/add.php";
-    public static final String URL_UPDATE_PARTICIPANT = "http://192.168.30.26/project/participant/update.php?id=";
-    public static final String URL_DELETE_PARTICIPANT = "http://192.168.30.26/project/participant/delete.php?id=";
+    public static final String URL_UPDATE_PARTICIPANT = "http://192.168.30.26/project/participant/update.php?participant_id=";
+    public static final String URL_DELETE_PARTICIPANT = "http://192.168.30.26/project/participant/delete.php?participant_id=";
 
 
     public static final String KEY_ID_PARTICIPANT = "participantid";
@@ -28,8 +28,8 @@ public class Config {
     public static final String URL_GET_ALL_INSTRUCTOR = "http://192.168.30.26/project/instructor/alldata.php";
     public static final String URL_GET_DETAIL_INSTRUCTOR = "http://192.168.30.26/project/instructor/detail.php?instructor_id=";
     public static final String URL_ADD_INSTRUCTOR = "http://192.168.30.26/project/instructor/add.php";
-    public static final String URL_UPDATE_INSTRUCTOR = "http://192.168.30.26/project/instructor/update.php?id=";
-    public static final String URL_DELETE_INSTRUCTOR = "http://192.168.30.26/project/instructor/delete.php?id=";
+    public static final String URL_UPDATE_INSTRUCTOR = "http://192.168.30.26/project/instructor/update.php?instructor_id=";
+    public static final String URL_DELETE_INSTRUCTOR = "http://192.168.30.26/project/instructor/delete.php?instructor_id=";
 
 
     public static final String KEY_ID_INSTRUCTOR = "instructorid";
@@ -89,8 +89,8 @@ public class Config {
     public static final String URL_GET_ALL_COMPANY = "http://192.168.30.26/project/company/alldata.php";
     public static final String URL_GET_DETAIL_COMPANY = "http://192.168.30.26/project/company/detail.php?company_id=";
     public static final String URL_ADD_COMPANY = "http://192.168.30.26/project/company/add.php";
-    public static final String URL_UPDATE_COMPANY = "http://192.168.30.26/project/company/update.php?id=";
-    public static final String URL_DELETE_COMPANY = "http://192.168.30.26/project/company/delete.php?id=";
+    public static final String URL_UPDATE_COMPANY = "http://192.168.30.26/project/company/update.php?company_id=";
+    public static final String URL_DELETE_COMPANY = "http://192.168.30.26/project/company/delete.php?company_id=";
 
 
     public static final String KEY_ID_COMPANY = "companyid";

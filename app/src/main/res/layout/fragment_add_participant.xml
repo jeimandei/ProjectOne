@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InstructorDetailFragment">
+    tools:context=".AddParticipantFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -12,30 +12,38 @@
         android:padding="16dp"
         android:orientation="vertical">
 
+
         <EditText
-            android:id="@+id/detail_id_instructor"
+            android:id="@+id/add_name_participant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Instructor ID"
-            android:editable="false"/>
+            android:hint="Participant Name"
+            />
         <EditText
-            android:id="@+id/detail_name_instructor"
+            android:id="@+id/add_email_participant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Instructor Name"
-            android:clickable="false"/>
+            android:inputType="textEmailAddress"
+            android:hint="Participant Email"
+            />
         <EditText
-            android:id="@+id/detail_email_instructor"
+            android:id="@+id/add_phone_participant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Instructor Email"
-            android:inputType="textEmailAddress"/>
-        <EditText
-            android:id="@+id/detail_phone_instructor"
+            android:hint="Participant Phone"
+            android:inputType="phone"
+            />
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Instructor Phone Number"
-            android:inputType="phone"/>
+            android:text="Company Name"
+            android:padding="4dp"/>
+        <Spinner
+            android:id="@+id/spinner_par_comp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
 
     </LinearLayout>
 
@@ -46,26 +54,17 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
         <Button
-            android:id="@+id/update_instructor"
+            android:id="@+id/add_participant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:padding="12dp"
             android:layout_weight="1"
-            android:text="Update Instructor"
+            android:text="Add Participant"
             android:layout_gravity="bottom"
             android:backgroundTint="#9AD0EC"/>
 
-        <Button
-            android:id="@+id/delete_instructor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:padding="12dp"
-            android:layout_weight="1"
-            android:text="Delete Instructor"
-            android:layout_gravity="bottom"
-            android:backgroundTint="#FF7878"/>
+
 
     </LinearLayout>
 

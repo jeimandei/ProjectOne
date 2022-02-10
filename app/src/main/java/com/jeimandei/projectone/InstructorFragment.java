@@ -18,6 +18,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -43,6 +45,8 @@ public class InstructorFragment extends Fragment {
     private String JSON_STRING;
     private ViewGroup viewGroup;
     private ListView lv_part;
+
+    private FloatingActionButton add;
 
     public InstructorFragment() {
         // Required empty public constructor
@@ -80,6 +84,19 @@ public class InstructorFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_instructor, container, false);
+        add = viewGroup.findViewById(R.id.instructor_save);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddSubjectFragment addSubjectFragment = new AddSubjectFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.framelayout,addSubjectFragment);
+                callFragment(addSubjectFragment);
+                fragmentTransaction.commit();
+            }
+        });
 
         lv_part = (ListView) viewGroup.findViewById(R.id.lv_instructor);
         getJSON();
@@ -187,4 +204,17 @@ public class InstructorFragment extends Fragment {
             }
         });
     }
+
+    public void callFragment(Fragment fragment) {
+        FragmentManager man = getActivity().getSupportFragmentManager();
+        FragmentTransaction trans = man.beginTransaction();
+        trans.setCustomAnimations(
+                android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right
+        );
+        trans.replace(R.id.framelayout, fragment);
+        trans.addToBackStack(null);
+        trans.commit();
+    }
+
 }

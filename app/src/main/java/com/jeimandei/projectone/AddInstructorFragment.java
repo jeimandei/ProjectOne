@@ -8,22 +8,29 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AddSubjectFragment#newInstance} factory method to
+ * Use the {@link AddInstructorFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddSubjectFragment extends Fragment {
+public class AddInstructorFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,10 +42,10 @@ public class AddSubjectFragment extends Fragment {
     private String mParam2;
 
     private Button add;
-    private EditText s_name;
+    private EditText i_name, i_email, i_phone;
     private ViewGroup viewGroup;
 
-    public AddSubjectFragment() {
+    public AddInstructorFragment() {
         // Required empty public constructor
     }
 
@@ -48,11 +55,11 @@ public class AddSubjectFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AddSubjectFragment.
+     * @return A new instance of fragment AddInstructorFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddSubjectFragment newInstance(String param1, String param2) {
-        AddSubjectFragment fragment = new AddSubjectFragment();
+    public static AddInstructorFragment newInstance(String param1, String param2) {
+        AddInstructorFragment fragment = new AddInstructorFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -73,15 +80,19 @@ public class AddSubjectFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_add_subject, container, false);
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_add_instructor, container, false);
 
-        s_name = viewGroup.findViewById(R.id.add_name_subject);
-        add = viewGroup.findViewById(R.id.add_subject);
+        i_name = viewGroup.findViewById(R.id.add_name_instructor);
+        i_email = viewGroup.findViewById(R.id.add_email_instructor);
+        i_phone = viewGroup.findViewById(R.id.add_phone_instructor);
+        add = viewGroup.findViewById(R.id.add_instructor);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name_s = s_name.getText().toString().trim();
+                String name_i = i_name.getText().toString().trim();
+                String email_i = i_email.getText().toString().trim();
+                String phone_i = i_phone.getText().toString().trim();
 
                 class SaveData extends AsyncTask<Void, Void, String> {
                     ProgressDialog loading;
@@ -95,10 +106,12 @@ public class AddSubjectFragment extends Fragment {
                     @Override
                     protected String doInBackground(Void... voids) {
                         HashMap<String, String> params = new HashMap<>();
-                        params.put(Config.KEY_NAME_SUBJECT, name_s);
+                        params.put(Config.KEY_NAME_INSTRUCTOR, name_i);
+                        params.put(Config.KEY_EMAIL_INSTRUCTOR, email_i);
+                        params.put(Config.KEY_PHONE_INSTRUCTOR, phone_i);
                         Log.d("inputss", String.valueOf(params));
                         HttpHandler handler = new HttpHandler();
-                        String res = handler.sendPostReq(Config.URL_ADD_SUBJECT, params);
+                        String res = handler.sendPostReq(Config.URL_ADD_INSTRUCTOR, params);
                         return res;
                     }
 
@@ -109,10 +122,10 @@ public class AddSubjectFragment extends Fragment {
                         Toast.makeText(getContext(), "Data Added Successfully...", Toast.LENGTH_LONG).show();
                         clearText();
 
-                        SubjectFragment subjectFragment = new SubjectFragment();
+                        InstructorFragment instructorFragment = new InstructorFragment();
                         FragmentManager fragmentManager = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.framelayout,subjectFragment);
+                        fragmentTransaction.replace(R.id.framelayout,instructorFragment);
                         fragmentTransaction.commit();
                     }
                 }
@@ -124,7 +137,10 @@ public class AddSubjectFragment extends Fragment {
         return viewGroup;
     }
     private void clearText() {
-        s_name.setText("");
-        s_name.requestFocus();
+        i_name.setText("");
+        i_email.setText("");
+        i_phone.setText("");
+        i_name.requestFocus();
     }
+
 }

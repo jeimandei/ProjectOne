@@ -3,35 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CompanyDetailFragment">
+    tools:context=".AddCompanyFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
-        android:id="@+id/detail_participant"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:orientation="vertical">
 
         <EditText
-            android:id="@+id/detail_id_company"
+            android:id="@+id/add_name_company"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:editable="false"
-            android:hint="Company ID" />
-
+            android:hint="Company Name"/>
         <EditText
-            android:id="@+id/detail_name_company"
+            android:id="@+id/add_address_company"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Company Name" />
-
-        <EditText
-            android:id="@+id/detail_address_company"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Company Address" />
-
+            android:hint="Company Address"/>
     </LinearLayout>
 
     <LinearLayout
@@ -41,26 +31,17 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
         <Button
-            android:id="@+id/update_company"
+            android:id="@+id/add_company"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:padding="12dp"
             android:layout_weight="1"
-            android:text="Update Company"
+            android:text="Add Subject"
             android:layout_gravity="bottom"
             android:backgroundTint="#9AD0EC"/>
 
-        <Button
-            android:id="@+id/delete_company"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:padding="12dp"
-            android:layout_weight="1"
-            android:text="Delete Company"
-            android:layout_gravity="bottom"
-            android:backgroundTint="#FF7878"/>
+
 
     </LinearLayout>
 
