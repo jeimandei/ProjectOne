@@ -18,6 +18,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -42,6 +44,8 @@ public class Class_DetailFragment extends Fragment {
     private String JSON_STRING;
     private ViewGroup viewGroup;
     private ListView lv_detailClass;
+
+    private FloatingActionButton add;
 
     public Class_DetailFragment() {
         // Required empty public constructor
@@ -81,6 +85,19 @@ public class Class_DetailFragment extends Fragment {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_class__detail, container, false);
 
         lv_detailClass = (ListView) viewGroup.findViewById(R.id.lv_classdetail);
+        add = (FloatingActionButton) viewGroup.findViewById(R.id.classdetail_save);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddClassDetailFragment addClassDetailFragment = new AddClassDetailFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.framelayout,addClassDetailFragment);
+                callFragment(addClassDetailFragment);
+                fragmentTransaction.commit();
+            }
+        });
 
         getJSON();
 
@@ -192,7 +209,16 @@ public class Class_DetailFragment extends Fragment {
             }
         });
 
-
-
+    }
+    public void callFragment(Fragment fragment) {
+        FragmentManager man = getActivity().getSupportFragmentManager();
+        FragmentTransaction trans = man.beginTransaction();
+        trans.setCustomAnimations(
+                android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right
+        );
+        trans.replace(R.id.framelayout, fragment);
+        trans.addToBackStack(null);
+        trans.commit();
     }
 }

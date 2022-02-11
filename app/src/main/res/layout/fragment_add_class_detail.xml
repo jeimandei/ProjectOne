@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddClassFragment">
+    tools:context=".AddClassDetailFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -12,28 +12,14 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-
-        <EditText
-            android:id="@+id/add_class_start"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Add Class Start" />
-
-        <EditText
-            android:id="@+id/add_class_end"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Add Class end"
-            android:inputType="textEmailAddress" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Class Instructor" />
+            android:text="Class Subject" />
 
         <Spinner
-            android:id="@+id/add_class_instructor"
+            android:id="@+id/add_classdetail_subject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="12dp" />
@@ -42,10 +28,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Class Subject" />
+            android:text="Participant Name" />
 
         <Spinner
-            android:id="@+id/add_class_subject"
+            android:id="@+id/add_classdetail_participant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="12dp" />
@@ -60,7 +46,7 @@
         android:paddingRight="16dp">
 
         <Button
-            android:id="@+id/add_class"
+            android:id="@+id/add_classdetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -68,7 +54,7 @@
             android:layout_weight="1"
             android:backgroundTint="#9AD0EC"
             android:padding="12dp"
-            android:text="Add Class" />
+            android:text="Add Detail Class" />
 
 
     </LinearLayout>

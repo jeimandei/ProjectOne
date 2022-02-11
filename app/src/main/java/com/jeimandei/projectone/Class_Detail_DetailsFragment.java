@@ -153,7 +153,7 @@ public class Class_Detail_DetailsFragment extends Fragment {
                 String id = object.getString(Config.TAG_JSON_ID_CLASSDETAIL);
                 String cdsubjectname = object.getString(Config.TAG_JSON_SUBJECTNAME_CLASSDETAIL);
                 String cdinstructorname = object.getString(Config.TAG_JSON_INSTRUCTORNAME_CLASSDETAIL);
-                //String cdtotalparticipant = object.getString(Config.TAG_JSON_TOTALPARTICIPANT_CLASSDETAIL);
+                String cdparticipantid = object.getString(Config.TAG_JSON_PARTICIPANTID_CLASSDETAIL);
                 //String cdclassstart = object.getString(Config.TAG_JSON_CLASSSTART_CLASSDETAIL);
                 String cdclassid= object.getString(Config.TAG_JSON_CLASSID_CLASSDETAIL);
                 String cdparticipantname= object.getString(Config.TAG_JSON_PARTICIPANTNAME_CLASSDETAIL);
@@ -162,7 +162,7 @@ public class Class_Detail_DetailsFragment extends Fragment {
                 cd.put(Config.TAG_JSON_ID_CLASSDETAIL, id);
                 cd.put(Config.TAG_JSON_SUBJECTNAME_CLASSDETAIL, cdsubjectname);
                 cd.put(Config.TAG_JSON_INSTRUCTORNAME_CLASSDETAIL, cdinstructorname);
-                //cd.put(Config.TAG_JSON_TOTALPARTICIPANT_CLASSDETAIL, cdtotalparticipant);
+                cd.put(Config.TAG_JSON_PARTICIPANTID_CLASSDETAIL, cdparticipantid);
                 //cd.put(Config.TAG_JSON_CLASSSTART_CLASSDETAIL, cdclassstart);
                 cd.put(Config.TAG_JSON_CLASSID_CLASSDETAIL, cdclassid);
                 cd.put(Config.TAG_JSON_PARTICIPANTNAME_CLASSDETAIL, cdparticipantname);
@@ -186,6 +186,29 @@ public class Class_Detail_DetailsFragment extends Fragment {
         sub.setText(Ssub);
         Log.d("DataArray: ", String.valueOf(adapter));
         lv_detailClassdetail.setAdapter(adapter);
+
+        lv_detailClassdetail.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Bundle bundle = new Bundle();
+                ParticipantDetailFragment participantDetailFragment = new ParticipantDetailFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.framelayout,participantDetailFragment);
+
+
+                HashMap<String, String> map = (HashMap) adapterView.getItemAtPosition(i);
+                String classid = map.get(Config.TAG_JSON_PARTICIPANTID_CLASSDETAIL).toString();
+                Bundle args = new Bundle();
+                args.putString("id", classid);
+                participantDetailFragment.setArguments(args);
+
+
+
+                Log.d("Par: ", String.valueOf(args));
+                fragmentTransaction.commit();
+            }
+        });
 
     }
 
