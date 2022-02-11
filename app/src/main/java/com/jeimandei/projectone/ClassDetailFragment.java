@@ -93,6 +93,9 @@ public class ClassDetailFragment extends Fragment {
         c_ins = view.findViewById(R.id.detail_class_instructor);
         c_sub = view.findViewById(R.id.detail_class_subject);
 
+        update = view.findViewById(R.id.update_class);
+        delete = view.findViewById(R.id.delete_class);
+
         String a = this.getArguments().getString("id");
         Config.CLASS_ID = a;
 

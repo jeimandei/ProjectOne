@@ -109,6 +109,12 @@ public class MainActivity extends AppCompatActivity {
                         mainBinding.navDrawer.closeDrawer(GravityCompat.START);
                         callFragment(fragments[0]);
                         break;
+                    case R.id.nav_classdetail:
+                        fragments[0] = new Class_DetailFragment();
+                        getSupportActionBar().setTitle("Class Detail");
+                        mainBinding.navDrawer.closeDrawer(GravityCompat.START);
+                        callFragment(fragments[0]);
+                        break;
                 }
                 return true;
             }

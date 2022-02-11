@@ -67,7 +67,7 @@ public class Config {
     public static final String URL_GET_DETAIL_CLASS = "http://192.168.30.26/project/class/detail.php?class_id=";
     public static final String URL_ADD_CLASS = "http://192.168.30.26/project/class/add.php";
     public static final String URL_UPDATE_CLASS = "http://192.168.30.26/project/class/update.php?id=";
-    public static final String URL_DELETE_CLASS = "http://192.168.30.26/project/class/delete.php?id=";
+    public static final String URL_DELETE_CLASS = "http://192.168.30.26/project/class/delete.php?class_id=";
 
 
     public static final String KEY_ID_CLASS = "classid";
@@ -103,4 +103,28 @@ public class Config {
     public static final String TAG_JSON_ADDRESS_COMPANY = "companyaddress";
 
     public static String COMPANY_ID = "company_id";
+
+    //Detail Class
+    public static final String URL_GET_ALL_CLASSDETAIL = "http://192.168.30.26/project/classdetail/alldata.php";
+    public static final String URL_GET_DETAIL_CLASSDETAIL = "http://192.168.30.26/project/classdetail/detail.php?company_id=";
+    public static final String URL_ADD_CLASSDETAIL = "http://192.168.30.26/project/classdetail/add.php";
+    public static final String URL_UPDATE_CLASSDETAIL = "http://192.168.30.26/project/classdetail/update.php?company_id=";
+    public static final String URL_DELETE_CLASSDETAIL = "http://192.168.30.26/project/classdetail/delete.php?company_id=";
+
+
+    public static final String KEY_ID_CLASSDETAIL = "classdetailid";
+    public static final String KEY_CLASSID_CLASSDETAIL = "classdetailclassid";
+    public static final String KEY_PARTICIPANTID_CLASSDETAIL = "classdetailparticipantid";
+
+    public static final String TAG_JSON_ARRAY_CLASSDETAIL = "classdetailresult";
+
+    public static final String TAG_JSON_ID_CLASSDETAIL = " ";
+    public static final String TAG_JSON_CLASSID_CLASSDETAIL = "classdetailclassid";
+    public static final String TAG_JSON_PARTICIPANTID_CLASSDETAIL = "classdetailparticipantid";
+
+    public static final String TAG_JSON_SUBJECTNAME_CLASSDETAIL = "classdetailsubjectname";
+    public static final String TAG_JSON_INSTRUCTORNAME_CLASSDETAIL = "classdetailinstructorname";
+    public static final String TAG_JSON_TOTALPARTICIPANT_CLASSDETAIL = "classdetailtotalparticipant";
+
+    public static String CLASSDETAIL_ID = "classresult";
 }

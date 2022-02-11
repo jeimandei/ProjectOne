@@ -18,8 +18,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -28,10 +26,10 @@ import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ClassFragment#newInstance} factory method to
+ * Use the {@link Class_DetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ClassFragment extends Fragment {
+public class Class_DetailFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,13 +39,11 @@ public class ClassFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     private String JSON_STRING;
     private ViewGroup viewGroup;
-    private ListView lv_part;
-    private FloatingActionButton add;
+    private ListView lv_detailClass;
 
-    public ClassFragment() {
+    public Class_DetailFragment() {
         // Required empty public constructor
     }
 
@@ -57,11 +53,11 @@ public class ClassFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ClassFragment.
+     * @return A new instance of fragment Class_DetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ClassFragment newInstance(String param1, String param2) {
-        ClassFragment fragment = new ClassFragment();
+    public static Class_DetailFragment newInstance(String param1, String param2) {
+        Class_DetailFragment fragment = new Class_DetailFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -82,25 +78,11 @@ public class ClassFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_class, container, false);
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_class__detail, container, false);
 
-
-        lv_part = (ListView) viewGroup.findViewById(R.id.lv_class);
-        add = viewGroup.findViewById(R.id.class_save);
+        lv_detailClass = (ListView) viewGroup.findViewById(R.id.lv_classdetail);
 
         getJSON();
-
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddClassFragment addClassFragment = new AddClassFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.framelayout,addClassFragment);
-                callFragment(addClassFragment);
-                fragmentTransaction.commit();
-            }
-        });
 
         return viewGroup;
     }
@@ -150,23 +132,25 @@ public class ClassFragment extends Fragment {
 
         try {
             jsonObject = new JSONObject(JSON_STRING);
-            JSONArray jsonArray = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY_CLASS);
-            Log.d("Data_JSON_LIST: ", String.valueOf(jsonArray));
+            JSONArray jsonArray = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY_CLASSDETAIL);
+            Log.d("DataArr: ", String.valueOf(jsonArray));
 
 
             for (int i=0;i<jsonArray.length(); i++){
                 JSONObject object = jsonArray.getJSONObject(i);
-                String id = object.getString(Config.TAG_JSON_ID_CLASS);
-                String instructor = object.getString(Config.TAG_JSON_INSTRUCTOR_CLASS);
-                String subject = object.getString(Config.TAG_JSON_SUBJECT_CLASS);
+                String id = object.getString(Config.TAG_JSON_ID_CLASSDETAIL);
+                String cdsubjectname = object.getString(Config.TAG_JSON_SUBJECTNAME_CLASSDETAIL);
+                String cdinstructorname = object.getString(Config.TAG_JSON_INSTRUCTORNAME_CLASSDETAIL);
+                String cdtotalparticipant = object.getString(Config.TAG_JSON_TOTALPARTICIPANT_CLASSDETAIL);
 
-                HashMap<String, String> classes = new HashMap<>();
-                classes.put(Config.TAG_JSON_ID_CLASS, id);
-                classes.put(Config.TAG_JSON_INSTRUCTOR_CLASS, instructor);
-                classes.put(Config.TAG_JSON_SUBJECT_CLASS, subject);
+                HashMap<String, String> cd = new HashMap<>();
+                cd.put(Config.TAG_JSON_ID_CLASSDETAIL, id);
+                cd.put(Config.TAG_JSON_SUBJECTNAME_CLASSDETAIL, cdsubjectname);
+                cd.put(Config.TAG_JSON_INSTRUCTORNAME_CLASSDETAIL, cdinstructorname);
+                cd.put(Config.TAG_JSON_TOTALPARTICIPANT_CLASSDETAIL, cdtotalparticipant);
 
-                arrayList.add(classes);
-                Log.d("DataArr: ", String.valueOf(classes));
+                arrayList.add(cd);
+                //Log.d("DataArr: ", String.valueOf(cd));
             }
 
         }catch (Exception e){
@@ -174,45 +158,14 @@ public class ClassFragment extends Fragment {
         }
 
         ListAdapter adapter = new SimpleAdapter(
-                viewGroup.getContext(), arrayList, R.layout.lv_class,
-                new String[] {Config.TAG_JSON_ID_CLASS, Config.TAG_JSON_INSTRUCTOR_CLASS, Config.TAG_JSON_SUBJECT_CLASS},
-                new int[] {R.id.lv_class_id, R.id.lv_class_instructor, R.id.lv_class_subject}
+                viewGroup.getContext(), arrayList, R.layout.lv_classdetail,
+                new String[] {Config.TAG_JSON_ID_CLASSDETAIL, Config.TAG_JSON_SUBJECTNAME_CLASSDETAIL, Config.TAG_JSON_INSTRUCTORNAME_CLASSDETAIL, Config.TAG_JSON_TOTALPARTICIPANT_CLASSDETAIL},
+                new int[] {R.id.lv_classdetail_id, R.id.lv_cd_subject_name, R.id.lv_cd_instructor_name, R.id.lv_cd_total_participant}
         );
         Log.d("DataArray: ", String.valueOf(adapter));
-        lv_part.setAdapter(adapter);
-        lv_part.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Bundle bundle = new Bundle();
-                ClassDetailFragment classDetailFragment = new ClassDetailFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.framelayout,classDetailFragment);
-
-
-                HashMap<String, String> map = (HashMap) adapterView.getItemAtPosition(i);
-                String classid = map.get(Config.TAG_JSON_ID_CLASS).toString();
-                Bundle args = new Bundle();
-                args.putString("id", classid);
-                classDetailFragment.setArguments(args);
+        lv_detailClass.setAdapter(adapter);
 
 
 
-                Log.d("Par: ", String.valueOf(args));
-                fragmentTransaction.commit();
-            }
-        });
-    }
-
-    public void callFragment(Fragment fragment) {
-        FragmentManager man = getActivity().getSupportFragmentManager();
-        FragmentTransaction trans = man.beginTransaction();
-        trans.setCustomAnimations(
-                android.R.anim.slide_in_left,
-                android.R.anim.slide_out_right
-        );
-        trans.replace(R.id.framelayout, fragment);
-        trans.addToBackStack(null);
-        trans.commit();
     }
 }

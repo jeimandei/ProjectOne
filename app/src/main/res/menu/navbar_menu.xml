@@ -21,11 +21,15 @@
             android:title="Instructor" />
         <item
             android:id="@+id/nav_subject"
-            android:icon="@drawable/ic_baseline_collections_bookmark_24"
+            android:icon="@drawable/ic_baseline_menu_book_24"
             android:title="Subject" />
         <item
             android:id="@+id/nav_class"
             android:icon="@drawable/ic_baseline_class_24"
             android:title="Class" />
+        <item
+            android:id="@+id/nav_classdetail"
+            android:icon="@drawable/ic_baseline_library_books_24"
+            android:title="Class Details" />
     </group>
 </menu>

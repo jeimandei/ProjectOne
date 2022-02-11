@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -94,6 +95,19 @@ public class AddParticipantFragment extends Fragment {
         p_comp = (Spinner) viewGroup.findViewById(R.id.spinner_par_comp);
 
         getJSON();
+
+        p_comp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                p_comp_id = String.valueOf(p_comp.getSelectedItemId());
+                Log.d("qwe:", p_comp_id);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,11 +203,10 @@ public class AddParticipantFragment extends Fragment {
                     Log.d("Data_JSON_LIST: ", String.valueOf(jsonArray));
 
 
-                    for (int i=0;i<jsonArray.length(); i++){
+                    for (int i=1;i<jsonArray.length(); i++){
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id = object.getString(Config.TAG_JSON_ID_COMPANY);
                         String name = object.getString(Config.TAG_JSON_NAME_COMPANY);
-                        p_comp_id = id;
 
                         arrayList.add(name);
                         Log.d("DataArr: ", String.valueOf(name));
