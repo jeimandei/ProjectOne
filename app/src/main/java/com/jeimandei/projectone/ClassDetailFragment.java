@@ -11,19 +11,24 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
@@ -43,9 +48,10 @@ public class ClassDetailFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    EditText c_id, c_start, c_end, c_ins, c_sub;
+    EditText c_id, c_start, c_end;
+    Spinner c_ins, c_sub;
     Button update, delete;
-    String id;
+    String id, JSON_STRING1, JSON_STRING2, c_insid, c_subid;
     ViewGroup view;
 
     final Calendar calendar = Calendar.getInstance();
@@ -102,6 +108,34 @@ public class ClassDetailFragment extends Fragment {
         Log.d("Ar: ", Config.CLASS_ID);
         id = a;
         c_id.setText(a);
+
+        getJSONIns();
+        c_ins.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                c_insid = String.valueOf(c_ins.getSelectedItemId()+1);
+                Log.d("qwe:", c_insid);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        getJSONSub();
+        c_sub.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                c_subid = String.valueOf(c_sub.getSelectedItemId()+1);
+                Log.d("qwe:", c_subid);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         getJSON();
 
@@ -160,6 +194,8 @@ public class ClassDetailFragment extends Fragment {
                         params.put(Config.KEY_ID_CLASS, id);
                         params.put(Config.KEY_START_CLASS, start);
                         params.put(Config.KEY_END_CLASS, end);
+                        params.put(Config.KEY_INSTRUCTOR_CLASS, c_insid);
+                        params.put(Config.KEY_SUBJECT_CLASS, c_subid);
 
                         Log.d("inputss", String.valueOf(params));
                         HttpHandler handler = new HttpHandler();
@@ -261,13 +297,13 @@ public class ClassDetailFragment extends Fragment {
 
             String class_start = object.getString(Config.TAG_JSON_START_CLASS);
             String class_end = object.getString(Config.TAG_JSON_END_CLASS);
-            String class_ins = object.getString(Config.TAG_JSON_INSTRUCTOR_CLASS);
-            String class_sub = object.getString(Config.TAG_JSON_SUBJECT_CLASS);
+            String class_ins = object.getString(Config.TAG_JSON_INSTRUCTORID_CLASS);
+            String class_sub = object.getString(Config.TAG_JSON_SUBJECTID_CLASS);
 
             c_start.setText(class_start);
             c_end.setText(class_end);
-            c_ins.setText(class_ins);
-            c_sub.setText(class_sub);
+            c_ins.setSelection(Integer.parseInt(class_ins)-1);
+            c_sub.setSelection(Integer.parseInt(class_sub)-1);
             Log.d("CekNama", json);
         }catch (Exception e){
             e.printStackTrace();
@@ -307,5 +343,141 @@ public class ClassDetailFragment extends Fragment {
         }
         Delete delete = new Delete();
         delete.execute();
+    }
+
+    private void getJSONIns() {
+        class GetJSON extends AsyncTask<Void, Void, String> {
+            ProgressDialog progressDialog;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(getContext(), "Getting Data", "Please wait...", false, false);
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                HttpHandler handler = new HttpHandler();
+                String result = handler.sendGetResp(Config.URL_GET_ALL_INSTRUCTOR);
+                Log.d("GetData", result);
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        progressDialog.dismiss();
+                    }
+                }, 1500);
+
+                JSON_STRING1 = s;
+                Log.d("Data_JSON", JSON_STRING1);
+
+                JSONObject jsonObject = null;
+                ArrayList<String> arrayList = new ArrayList<>();
+
+                try {
+                    jsonObject = new JSONObject(JSON_STRING1);
+                    JSONArray jsonArray = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY_INSTRUCTOR);
+                    Log.d("ass", String.valueOf(jsonArray));
+                    Log.d("Data_JSON_LIST: ", String.valueOf(jsonArray));
+
+
+                    for (int i=0;i<jsonArray.length(); i++){
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id = object.getString(Config.TAG_JSON_ID_INSTRUCTOR);
+                        String name = object.getString(Config.TAG_JSON_NAME_INSTRUCTOR);
+                        c_insid = id;
+
+
+                        arrayList.add(name);
+                        Log.d("DataArr: ", String.valueOf(name));
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, arrayList);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                c_ins.setAdapter(adapter);
+                Log.d("spin", String.valueOf(arrayList));
+            }
+        }
+        GetJSON getJSON = new GetJSON();
+        getJSON.execute();
+    }
+
+    private void getJSONSub() {
+        class GetJSON extends AsyncTask<Void, Void, String> {
+            ProgressDialog progressDialog;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(getContext(), "Getting Data", "Please wait...", false, false);
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                HttpHandler handler = new HttpHandler();
+                String result = handler.sendGetResp(Config.URL_GET_ALL_SUBJECT);
+                Log.d("GetData", result);
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        progressDialog.dismiss();
+                    }
+                }, 1500);
+
+                JSON_STRING2 = s;
+                Log.d("Data_JSON", JSON_STRING2);
+
+                JSONObject jsonObject = null;
+                ArrayList<String> arrayList = new ArrayList<>();
+
+                try {
+                    jsonObject = new JSONObject(JSON_STRING2);
+                    JSONArray jsonArray = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY_SUBJECT);
+                    Log.d("ass", String.valueOf(jsonArray));
+                    Log.d("Data_JSON_LIST: ", String.valueOf(jsonArray));
+
+
+                    for (int i=0;i<jsonArray.length(); i++){
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id = object.getString(Config.TAG_JSON_ID_SUBJECT);
+                        String name = object.getString(Config.TAG_JSON_NAME_SUBJECT);
+                        c_subid = id;
+
+
+                        arrayList.add(name);
+                        Log.d("DataArr: ", String.valueOf(name));
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, arrayList);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                c_sub.setAdapter(adapter);
+                Log.d("spin", String.valueOf(arrayList));
+            }
+        }
+        GetJSON getJSON = new GetJSON();
+        getJSON.execute();
     }
 }

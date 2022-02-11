@@ -149,7 +149,7 @@ public class Class_DetailFragment extends Fragment {
 
         try {
             jsonObject = new JSONObject(JSON_STRING);
-            JSONArray jsonArray = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY_CLASSDETAIL);
+            JSONArray jsonArray = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY_CLASSDETAILSS);
             Log.d("DataArr: ", String.valueOf(jsonArray));
 
 

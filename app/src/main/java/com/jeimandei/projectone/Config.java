@@ -21,6 +21,7 @@ public class Config {
     public static final String TAG_JSON_EMAIL_PARTICIPANT = "participantemail";
     public static final String TAG_JSON_PHONE_PARTICIPANT = "participantphone";
     public static final String TAG_JSON_COMPANY_PARTICIPANT = "participantcompany";
+    public static final String TAG_JSON_COMPANYID_PARTICIPANT = "participantcompanyid";
 
     public static String PARTICIPANT_ID = "participant_id";
 
@@ -81,7 +82,9 @@ public class Config {
     public static final String TAG_JSON_START_CLASS = "classstart";
     public static final String TAG_JSON_END_CLASS = "classend";
     public static final String TAG_JSON_INSTRUCTOR_CLASS = "classinstructor";
+    public static final String TAG_JSON_INSTRUCTORID_CLASS = "classinstructorid";
     public static final String TAG_JSON_SUBJECT_CLASS = "classsubject";
+    public static final String TAG_JSON_SUBJECTID_CLASS = "classsubjectid";
 
     public static String CLASS_ID = "class_id";
 
@@ -107,10 +110,10 @@ public class Config {
     //Detail Class
     public static final String URL_GET_ALL_CLASSDETAIL = "http://192.168.30.26/project/classdetail/alldata.php";
     public static final String URL_GET_ALL_CLASSDETAIL_BY_CLASSID = "http://192.168.30.26/project/classdetail/detailclass.php?class_id=";
-    public static final String URL_GET_DETAIL_CLASSDETAIL = "http://192.168.30.26/project/classdetail/detail.php?company_id=";
+    public static final String URL_GET_DETAIL_CLASSDETAIL = "http://192.168.30.26/project/classdetail/detail.php?classdetail_id=";
     public static final String URL_ADD_CLASSDETAIL = "http://192.168.30.26/project/classdetail/add.php";
     public static final String URL_UPDATE_CLASSDETAIL = "http://192.168.30.26/project/classdetail/update.php?company_id=";
-    public static final String URL_DELETE_CLASSDETAIL = "http://192.168.30.26/project/classdetail/delete.php?company_id=";
+    public static final String URL_DELETE_CLASSDETAIL = "http://192.168.30.26/project/classdetail/delete.php?classdetail_id=";
 
 
     public static final String KEY_ID_CLASSDETAIL = "classdetailid";
@@ -118,6 +121,9 @@ public class Config {
     public static final String KEY_PARTICIPANTID_CLASSDETAIL = "classdetailparticipantid";
 
     public static final String TAG_JSON_ARRAY_CLASSDETAIL = "classdetailresult";
+    public static final String TAG_JSON_ARRAY_CLASSDETAILSS = "classdetailresults";
+
+    public static final String TAG_JSON_ARRAY_CLASSDETAILS = "classdetailsresult";
 
     public static final String TAG_JSON_ID_CLASSDETAIL = "classdetailid";
     public static final String TAG_JSON_CLASSID_CLASSDETAIL = "classdetailclassid";
@@ -131,4 +137,5 @@ public class Config {
     public static final String TAG_JSON_PARTICIPANTNAME_CLASSDETAIL = "classdetailparticipantname";
 
     public static String CLASSDETAIL_CLASSID_ID = "classdetailresult";
+    public static String CLASSDETAIL_ID = "classdetailid";
 }

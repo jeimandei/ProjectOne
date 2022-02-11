@@ -16,13 +16,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -37,11 +41,12 @@ public class ParticipantDetailFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    EditText p_id, p_name, p_email, p_phone, p_company;
+    EditText p_id, p_name, p_email, p_phone;
     Button update, delete;
     String id, id_comp;
     ViewGroup view;
-    String JSON_STRING;
+    String JSON_STRING, p_compid;
+    Spinner p_company;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -103,6 +108,20 @@ public class ParticipantDetailFragment extends Fragment {
         id = a;
         p_id.setText(a);
 
+        getJSONComp();
+        p_company.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                p_compid = String.valueOf(p_company.getSelectedItemId()+1);
+                Log.d("qwe:", p_compid);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         getJSON();
 
         update.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +130,6 @@ public class ParticipantDetailFragment extends Fragment {
                 final String name = p_name.getText().toString().trim();
                 final String email = p_email.getText().toString().trim();
                 final String phone = p_phone.getText().toString().trim();
-                final String company = p_company.getText().toString().trim();
 
                 class UpdateData extends AsyncTask<Void, Void, String>{
 
@@ -130,6 +148,7 @@ public class ParticipantDetailFragment extends Fragment {
                         params.put(Config.KEY_NAME_PARTICIPANT, name);
                         params.put(Config.KEY_EMAIL_PARTICIPANT, email);
                         params.put(Config.KEY_PHONE_PARTICIPANT, phone);
+                        params.put(Config.KEY_COMPANY_PARTICIPANT, p_compid);
 
                         Log.d("in", name);
                         Log.d("inputss", String.valueOf(params));
@@ -221,12 +240,12 @@ public class ParticipantDetailFragment extends Fragment {
             String name = object.getString(Config.TAG_JSON_NAME_PARTICIPANT);
             String email = object.getString(Config.TAG_JSON_EMAIL_PARTICIPANT);
             String phone = object.getString(Config.TAG_JSON_PHONE_PARTICIPANT);
-            String company = object.getString(Config.TAG_JSON_COMPANY_PARTICIPANT);
+            String company = object.getString(Config.TAG_JSON_COMPANYID_PARTICIPANT);
 
             p_name.setText(name);
             p_email.setText(email);
-            p_phone.setText("+" + phone.trim());
-            p_company.setText(company);
+            p_phone.setText(phone);
+            p_company.setSelection(Integer.parseInt(company)-1);
             Log.d("CekNama", json);
         }catch (Exception e){
             e.printStackTrace();
@@ -266,5 +285,73 @@ public class ParticipantDetailFragment extends Fragment {
         }
         Delete delete = new Delete();
         delete.execute();
+    }
+
+    private void getJSONComp() {
+        class GetJSON extends AsyncTask<Void, Void, String> {
+            ProgressDialog progressDialog;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(getContext(), "Getting Data", "Please wait...", false, false);
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                HttpHandler handler = new HttpHandler();
+                String result = handler.sendGetResp(Config.URL_GET_ALL_COMPANY);
+                Log.d("GetData", result);
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        progressDialog.dismiss();
+                    }
+                }, 1500);
+
+                JSON_STRING = s;
+                Log.d("Data_JSON", JSON_STRING);
+
+                JSONObject jsonObject = null;
+                ArrayList<String> arrayList = new ArrayList<>();
+
+                try {
+                    jsonObject = new JSONObject(JSON_STRING);
+                    JSONArray jsonArray = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY_COMPANY);
+                    Log.d("ass", String.valueOf(jsonArray));
+                    Log.d("Data_JSON_LIST: ", String.valueOf(jsonArray));
+
+
+                    for (int i=0;i<jsonArray.length(); i++){
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id = object.getString(Config.TAG_JSON_ID_COMPANY);
+                        String name = object.getString(Config.TAG_JSON_NAME_COMPANY);
+                        p_compid = id;
+
+
+                        arrayList.add(name);
+                        Log.d("DataArr: ", String.valueOf(name));
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, arrayList);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                p_company.setAdapter(adapter);
+                Log.d("spin", String.valueOf(arrayList));
+            }
+        }
+        GetJSON getJSON = new GetJSON();
+        getJSON.execute();
     }
 }

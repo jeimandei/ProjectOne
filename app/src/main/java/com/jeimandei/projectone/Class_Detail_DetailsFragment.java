@@ -84,9 +84,10 @@ public class Class_Detail_DetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_class__detail__details, container, false);
         String a = this.getArguments().getString("id");
-        Config.CLASS_ID = a;
+        Config.CLASSDETAIL_CLASSID_ID = a;
+        Log.d("a:", a);
 
-        Log.d("Ar: ", Config.CLASSDETAIL_CLASSID_ID);
+        //Log.d("Ar: ", id);
         id = a;
 
         lv_detailClassdetail = (ListView) viewGroup.findViewById(R.id.lv_classdetail_details);
@@ -94,6 +95,29 @@ public class Class_Detail_DetailsFragment extends Fragment {
         ins = (TextView) viewGroup.findViewById(R.id.cdd_instructor_name);
 
         getJSON();
+
+        lv_detailClassdetail.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Bundle bundle = new Bundle();
+                Class_Detail_DetailsDetailFragment class_detail_detailsDetailFragment = new Class_Detail_DetailsDetailFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.framelayout,class_detail_detailsDetailFragment);
+
+
+                HashMap<String, String> map = (HashMap) adapterView.getItemAtPosition(i);
+                String classdetailid = map.get(Config.TAG_JSON_ID_CLASSDETAIL).toString();
+                Bundle args = new Bundle();
+                args.putString("id", classdetailid);
+                class_detail_detailsDetailFragment.setArguments(args);
+
+
+
+                Log.d("Par: ", String.valueOf(args));
+                fragmentTransaction.commit();
+            }
+        });
 
         return viewGroup;
     }
@@ -125,7 +149,7 @@ public class Class_Detail_DetailsFragment extends Fragment {
                     public void run() {
                         progressDialog.dismiss();
                     }
-                }, 3000);
+                }, 1000);
 
                 JSON_STRING = s;
                 Log.d("Data_JSON", JSON_STRING);
@@ -144,7 +168,7 @@ public class Class_Detail_DetailsFragment extends Fragment {
 
         try {
             jsonObject = new JSONObject(JSON_STRING);
-            JSONArray jsonArray = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY_CLASSDETAIL);
+            JSONArray jsonArray = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY_CLASSDETAILS);
             Log.d("DataArr: ", String.valueOf(jsonArray));
 
 
@@ -191,17 +215,17 @@ public class Class_Detail_DetailsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Bundle bundle = new Bundle();
-                ParticipantDetailFragment participantDetailFragment = new ParticipantDetailFragment();
+                Class_Detail_DetailsDetailFragment class_detail_detailsDetailFragment = new Class_Detail_DetailsDetailFragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.framelayout,participantDetailFragment);
+                fragmentTransaction.replace(R.id.framelayout,class_detail_detailsDetailFragment);
 
 
                 HashMap<String, String> map = (HashMap) adapterView.getItemAtPosition(i);
                 String classid = map.get(Config.TAG_JSON_PARTICIPANTID_CLASSDETAIL).toString();
                 Bundle args = new Bundle();
                 args.putString("id", classid);
-                participantDetailFragment.setArguments(args);
+                class_detail_detailsDetailFragment.setArguments(args);
 
 
 

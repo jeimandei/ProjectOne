@@ -29,18 +29,31 @@
             android:layout_height="wrap_content"
             android:hint="Class End"
             android:inputType="textEmailAddress"/>
-        <EditText
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="Class Instructor" />
+
+        <Spinner
             android:id="@+id/detail_class_instructor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Class Instructor"
-            android:editable="false"/>
-        <EditText
+            android:paddingTop="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="Class Subject" />
+
+        <Spinner
             android:id="@+id/detail_class_subject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Class Subject"
-            android:editable="false"/>
+            android:paddingTop="12dp" />
+
+
 
     </LinearLayout>
 

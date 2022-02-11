@@ -111,6 +111,8 @@ public class AccountFragment extends Fragment {
         birthday = viewGroup.findViewById(R.id.acc_birthday);
         save = viewGroup.findViewById(R.id.acc_save);
 
+
+
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -5,11 +5,36 @@
     android:layout_height="match_parent"
     tools:context=".ParticipantFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ListView
-        android:id="@+id/lv_participant"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <EditText android:id="@+id/participantSearch"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search products.."
+            android:inputType="text"/>
+
+    </LinearLayout>
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+        <ListView
+            android:id="@+id/lv_participant"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/participant_save"

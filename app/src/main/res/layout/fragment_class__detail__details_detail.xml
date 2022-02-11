@@ -3,46 +3,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ParticipantDetailFragment">
+    tools:context=".Class_Detail_DetailsDetailFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
+
 
         <EditText
-            android:id="@+id/detail_id_participant"
+            android:id="@+id/detail_classdetail_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Participant ID"
-            android:editable="false"/>
-        <EditText
-            android:id="@+id/detail_name_participant"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Participant Name"/>
-        <EditText
-            android:id="@+id/detail_email_participant"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Participant Email"
-            android:inputType="textEmailAddress"/>
-        <EditText
-            android:id="@+id/detail_phone_participant"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Participant Phone Number"
-            android:inputType="phone"/>
+            android:hint="Class Detail ID"
+            android:editable="false"
+            android:inputType="textEmailAddress" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Participant Company" />
+            android:text="Class Subject" />
 
         <Spinner
-            android:id="@+id/detail_company_participant"
+            android:id="@+id/detail_classdetail_subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="Class Participant" />
+
+        <Spinner
+            android:id="@+id/detail_classdetail_participant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="12dp" />
@@ -56,24 +54,24 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
         <Button
-            android:id="@+id/update_participant"
+            android:id="@+id/update_classdetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:padding="12dp"
             android:layout_weight="1"
-            android:text="Update Participant"
+            android:text="Update Detail"
             android:layout_gravity="bottom"
             android:backgroundTint="#9AD0EC"/>
 
         <Button
-            android:id="@+id/delete_participant"
+            android:id="@+id/delete_classdetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:padding="12dp"
             android:layout_weight="1"
-            android:text="Delete Participant"
+            android:text="Delete Detail"
             android:layout_gravity="bottom"
             android:backgroundTint="#FF7878"/>
 
