@@ -118,7 +118,7 @@ public class Config {
 
     public static final String TAG_JSON_ARRAY_CLASSDETAIL = "classdetailresult";
 
-    public static final String TAG_JSON_ID_CLASSDETAIL = " ";
+    public static final String TAG_JSON_ID_CLASSDETAIL = "classdetailid";
     public static final String TAG_JSON_CLASSID_CLASSDETAIL = "classdetailclassid";
     public static final String TAG_JSON_PARTICIPANTID_CLASSDETAIL = "classdetailparticipantid";
 
