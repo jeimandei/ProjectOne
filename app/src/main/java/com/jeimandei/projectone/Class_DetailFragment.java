@@ -142,12 +142,16 @@ public class Class_DetailFragment extends Fragment {
                 String cdsubjectname = object.getString(Config.TAG_JSON_SUBJECTNAME_CLASSDETAIL);
                 String cdinstructorname = object.getString(Config.TAG_JSON_INSTRUCTORNAME_CLASSDETAIL);
                 String cdtotalparticipant = object.getString(Config.TAG_JSON_TOTALPARTICIPANT_CLASSDETAIL);
+                String cdclassstart = object.getString(Config.TAG_JSON_CLASSSTART_CLASSDETAIL);
+                String cdclassid= object.getString(Config.TAG_JSON_CLASSID_CLASSDETAIL);
 
                 HashMap<String, String> cd = new HashMap<>();
                 cd.put(Config.TAG_JSON_ID_CLASSDETAIL, id);
                 cd.put(Config.TAG_JSON_SUBJECTNAME_CLASSDETAIL, cdsubjectname);
                 cd.put(Config.TAG_JSON_INSTRUCTORNAME_CLASSDETAIL, cdinstructorname);
                 cd.put(Config.TAG_JSON_TOTALPARTICIPANT_CLASSDETAIL, cdtotalparticipant);
+                cd.put(Config.TAG_JSON_CLASSSTART_CLASSDETAIL, cdclassstart);
+                cd.put(Config.TAG_JSON_CLASSID_CLASSDETAIL, cdclassid);
 
                 arrayList.add(cd);
                 //Log.d("DataArr: ", String.valueOf(cd));
@@ -159,11 +163,34 @@ public class Class_DetailFragment extends Fragment {
 
         ListAdapter adapter = new SimpleAdapter(
                 viewGroup.getContext(), arrayList, R.layout.lv_classdetail,
-                new String[] {Config.TAG_JSON_ID_CLASSDETAIL, Config.TAG_JSON_SUBJECTNAME_CLASSDETAIL, Config.TAG_JSON_INSTRUCTORNAME_CLASSDETAIL, Config.TAG_JSON_TOTALPARTICIPANT_CLASSDETAIL},
-                new int[] {R.id.lv_classdetail_id, R.id.lv_cd_subject_name, R.id.lv_cd_instructor_name, R.id.lv_cd_total_participant}
+                new String[] {Config.TAG_JSON_ID_CLASSDETAIL, Config.TAG_JSON_SUBJECTNAME_CLASSDETAIL, Config.TAG_JSON_INSTRUCTORNAME_CLASSDETAIL, Config.TAG_JSON_TOTALPARTICIPANT_CLASSDETAIL, Config.TAG_JSON_CLASSSTART_CLASSDETAIL},
+                new int[] {R.id.lv_classdetail_id, R.id.lv_cd_subject_name, R.id.lv_cd_instructor_name, R.id.lv_cd_total_participant, R.id.lv_cd_classstart}
         );
         Log.d("DataArray: ", String.valueOf(adapter));
         lv_detailClass.setAdapter(adapter);
+
+        lv_detailClass.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Bundle bundle = new Bundle();
+                Class_Detail_DetailsFragment class_detail_detailsFragment = new Class_Detail_DetailsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.framelayout,class_detail_detailsFragment);
+
+
+                HashMap<String, String> map = (HashMap) adapterView.getItemAtPosition(i);
+                String classid = map.get(Config.TAG_JSON_CLASSID_CLASSDETAIL).toString();
+                Bundle args = new Bundle();
+                args.putString("id", classid);
+                class_detail_detailsFragment.setArguments(args);
+
+
+
+                Log.d("Par: ", String.valueOf(args));
+                fragmentTransaction.commit();
+            }
+        });
 
 
 

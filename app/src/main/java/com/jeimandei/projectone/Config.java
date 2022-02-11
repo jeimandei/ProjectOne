@@ -106,6 +106,7 @@ public class Config {
 
     //Detail Class
     public static final String URL_GET_ALL_CLASSDETAIL = "http://192.168.30.26/project/classdetail/alldata.php";
+    public static final String URL_GET_ALL_CLASSDETAIL_BY_CLASSID = "http://192.168.30.26/project/classdetail/detailclass.php?class_id=";
     public static final String URL_GET_DETAIL_CLASSDETAIL = "http://192.168.30.26/project/classdetail/detail.php?company_id=";
     public static final String URL_ADD_CLASSDETAIL = "http://192.168.30.26/project/classdetail/add.php";
     public static final String URL_UPDATE_CLASSDETAIL = "http://192.168.30.26/project/classdetail/update.php?company_id=";
@@ -125,6 +126,9 @@ public class Config {
     public static final String TAG_JSON_SUBJECTNAME_CLASSDETAIL = "classdetailsubjectname";
     public static final String TAG_JSON_INSTRUCTORNAME_CLASSDETAIL = "classdetailinstructorname";
     public static final String TAG_JSON_TOTALPARTICIPANT_CLASSDETAIL = "classdetailtotalparticipant";
+    public static final String TAG_JSON_CLASSSTART_CLASSDETAIL = "classdetailclassstart";
 
-    public static String CLASSDETAIL_ID = "classresult";
+    public static final String TAG_JSON_PARTICIPANTNAME_CLASSDETAIL = "classdetailparticipantname";
+
+    public static String CLASSDETAIL_CLASSID_ID = "classdetailresult";
 }
