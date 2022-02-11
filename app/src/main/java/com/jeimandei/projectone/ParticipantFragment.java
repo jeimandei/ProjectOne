@@ -47,8 +47,6 @@ public class ParticipantFragment extends Fragment{
     private ViewGroup viewGroup;
     private ListView lv_part;
     private FloatingActionButton add;
-    EditText search;
-    ArrayList<HashMap<String, String>> searchadapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -93,24 +91,6 @@ public class ParticipantFragment extends Fragment{
 
         lv_part = (ListView) viewGroup.findViewById(R.id.lv_participant);
         add = viewGroup.findViewById(R.id.participant_save);
-        search = viewGroup.findViewById(R.id.participantSearch);
-
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,8 +191,6 @@ public class ParticipantFragment extends Fragment{
         Log.d("DataArray: ", String.valueOf(adapter));
         lv_part.setAdapter(adapter);
 
-        searchadapter = arrayList;
-        Log.d("ada:", String.valueOf(searchadapter));
 
 
         lv_part.setOnItemClickListener(new AdapterView.OnItemClickListener() {

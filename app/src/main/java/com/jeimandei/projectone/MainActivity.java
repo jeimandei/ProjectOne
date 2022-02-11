@@ -46,9 +46,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        final Fragment[] fragments = {null};
+
         switch (item.getItemId()){
             case R.id.toolbar_search:
-                startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                fragments[0] = new SearchParticipantFragment();
+                getSupportActionBar().setTitle("Search Participant");
+                callFragment(fragments[0]);
                 break;
         }
         return super.onOptionsItemSelected(item);
