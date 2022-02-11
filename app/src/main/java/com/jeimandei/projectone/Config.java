@@ -112,7 +112,7 @@ public class Config {
     public static final String URL_GET_ALL_CLASSDETAIL_BY_CLASSID = "http://192.168.30.26/project/classdetail/detailclass.php?class_id=";
     public static final String URL_GET_DETAIL_CLASSDETAIL = "http://192.168.30.26/project/classdetail/detail.php?classdetail_id=";
     public static final String URL_ADD_CLASSDETAIL = "http://192.168.30.26/project/classdetail/add.php";
-    public static final String URL_UPDATE_CLASSDETAIL = "http://192.168.30.26/project/classdetail/update.php?company_id=";
+    public static final String URL_UPDATE_CLASSDETAIL = "http://192.168.30.26/project/classdetail/update.php?classdetail_id=";
     public static final String URL_DELETE_CLASSDETAIL = "http://192.168.30.26/project/classdetail/delete.php?classdetail_id=";
 
 

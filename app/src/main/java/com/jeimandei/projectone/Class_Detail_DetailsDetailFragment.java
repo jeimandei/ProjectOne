@@ -26,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -149,6 +150,60 @@ public class Class_Detail_DetailsDetailFragment extends Fragment {
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
 
+            }
+        });
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                class UpdateData extends AsyncTask<Void, Void, String>{
+
+                    ProgressDialog loading;
+
+                    @Override
+                    protected void onPreExecute() {
+                        super.onPreExecute();
+                        loading = ProgressDialog.show(getContext(), "Changing Data", "Please Wait...", false, false);
+                    }
+
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        HashMap<String, String> params = new HashMap<>();
+                        params.put(Config.KEY_ID_CLASSDETAIL, id);
+                        params.put(Config.KEY_CLASSID_CLASSDETAIL, cd_sub_id);
+                        params.put(Config.KEY_PARTICIPANTID_CLASSDETAIL, cd_part_id);
+
+
+                        Log.d("inputss", String.valueOf(params));
+                        HttpHandler handler = new HttpHandler();
+                        String res = handler.sendPostReq(Config.URL_UPDATE_CLASSDETAIL, params);
+
+                        return res;
+                    }
+
+                    @Override
+                    protected void onPostExecute(String s) {
+                        super.onPostExecute(s);
+                        loading.dismiss();
+                        Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+
+                        Class_Detail_DetailsFragment class_detail_detailsFragment = new Class_Detail_DetailsFragment();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.framelayout,class_detail_detailsFragment);
+
+                        Bundle args = new Bundle();
+                        args.putString("id", Config.CLASSDETAIL_ID);
+                        class_detail_detailsFragment.setArguments(args);
+                        fragmentTransaction.commit();
+
+
+                        Log.d("Par: ", String.valueOf(args));
+                    }
+                }
+                UpdateData updateData = new UpdateData();
+                updateData.execute();
             }
         });
 
@@ -373,7 +428,7 @@ public class Class_Detail_DetailsDetailFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.framelayout,class_detail_detailsFragment);
                 Bundle args = new Bundle();
-                args.putString("id", Config.TAG_JSON_CLASSID_CLASSDETAIL);
+                args.putString("id", Config.CLASSDETAIL_ID);
                 class_detail_detailsFragment.setArguments(args);
                 fragmentTransaction.commit();
             }
