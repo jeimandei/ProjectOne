@@ -159,7 +159,7 @@ public class Class_DetailFragment extends Fragment {
 
         ListAdapter adapter = new SimpleAdapter(
                 viewGroup.getContext(), arrayList, R.layout.lv_classdetail,
-                new String[] {Config.TAG_JSON_ID_CLASSDETAIL, Config.TAG_JSON_SUBJECTNAME_CLASSDETAIL, Config.TAG_JSON_INSTRUCTORNAME_CLASSDETAIL, "Total: " + Config.TAG_JSON_TOTALPARTICIPANT_CLASSDETAIL},
+                new String[] {Config.TAG_JSON_ID_CLASSDETAIL, Config.TAG_JSON_SUBJECTNAME_CLASSDETAIL, Config.TAG_JSON_INSTRUCTORNAME_CLASSDETAIL, Config.TAG_JSON_TOTALPARTICIPANT_CLASSDETAIL},
                 new int[] {R.id.lv_classdetail_id, R.id.lv_cd_subject_name, R.id.lv_cd_instructor_name, R.id.lv_cd_total_participant}
         );
         Log.d("DataArray: ", String.valueOf(adapter));
