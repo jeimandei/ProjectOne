@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchParticipantFragment">
+    tools:context=".SearchInstructorFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -17,10 +17,10 @@
             android:layout_height="wrap_content"
             android:padding="12dp">
 
-            <EditText android:id="@+id/participantSearch"
+            <EditText android:id="@+id/instructorSearch"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:hint="Search participant..."
+                android:hint="Search instructor..."
                 android:inputType="text"/>
 
         </LinearLayout>
@@ -29,7 +29,7 @@
 
 
         <ListView
-            android:id="@+id/lv_participantsearch"
+            android:id="@+id/lv_instructorsearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

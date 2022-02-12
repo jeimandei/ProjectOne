@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     Toolbar toolbar;
     TextView n_name, n_email;
+    private MenuItem mmenu;
 
 
     @Override
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         initView();
     }
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
@@ -47,11 +51,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         final Fragment[] fragments = {null};
-
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_search_24);
         switch (item.getItemId()){
-            case R.id.toolbar_search:
+            case R.id.toolbar_search_participant:
                 fragments[0] = new SearchParticipantFragment();
                 getSupportActionBar().setTitle("Search Participant");
+                callFragment(fragments[0]);
+                break;
+            case R.id.toolbar_search_instructor:
+                fragments[0] = new SearchInstructorFragment();
+                getSupportActionBar().setTitle("Search Instructor");
+                callFragment(fragments[0]);
+                break;
+            case R.id.toolbar_search_class:
+                fragments[0] = new SearchClassFragment();
+                getSupportActionBar().setTitle("Search Class Subject");
                 callFragment(fragments[0]);
                 break;
         }
