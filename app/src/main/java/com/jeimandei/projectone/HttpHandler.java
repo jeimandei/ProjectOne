@@ -1,5 +1,6 @@
 package com.jeimandei.projectone;
 
+import android.net.Uri;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -11,7 +12,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class HttpHandler {
@@ -108,8 +111,11 @@ public class HttpHandler {
     public String sendGetRespDate(String responseUrl, String start, String end) {
         StringBuilder sb = new StringBuilder();
         try {
-            URL url = new URL(responseUrl + start + "&end=" + end);
-            Log.d("url:", String.valueOf(url));
+            Uri.Builder builder = new Uri.Builder();
+            builder.appendQueryParameter("start", start).
+                    appendQueryParameter("end", end);
+            URL url = new URL(responseUrl + builder);
+            Log.d("url:", String.valueOf(builder));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(connection.getInputStream())

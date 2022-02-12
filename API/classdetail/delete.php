@@ -6,7 +6,7 @@
  require_once('../connection.php');
  
  //Membuat SQL Query
- $sql = "DELETE FROM class_detail WHERE ClassDetailID=$id;";
+ $sql = "DELETE FROM class_detail WHERE ClassDetailID=$id";
 
  
  //Menghapus Nilai pada Database 

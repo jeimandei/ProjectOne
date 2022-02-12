@@ -22,13 +22,15 @@
                 android:layout_height="wrap_content"
                 android:hint="Start Date"
                 android:layout_weight="1"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:textAlignment="center"/>
             <EditText android:id="@+id/dateendSearch"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="End Date"
                 android:layout_weight="1"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:textAlignment="center"/>
 
 
 

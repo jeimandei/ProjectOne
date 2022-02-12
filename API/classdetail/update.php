@@ -9,7 +9,7 @@
 		require_once('../connection.php');
 		
 		//Membuat SQL Query
-		$sql = "UPDATE class_detail SET ClassID = '$class', ParticipantID = '$participant' WHERE ClassDetailID = $id;";
+		$sql = "UPDATE class_detail SET ClassID = '$class', ParticipantID = '$participant' WHERE ClassDetailID = $id";
 		
 		//Meng-update Database 
 		if(mysqli_query($con,$sql)){

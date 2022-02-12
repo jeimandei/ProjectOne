@@ -3,7 +3,7 @@
 	require_once('../connection.php');
 	
 	//Membuat SQL Query
-	$sql = "SELECT cd.ClassDetailID, c.ClassID, s.SubjectName, i.InstructorName, c.ClassStart, COUNT(cd.ParticipantID) AS 'TotalParticipant' FROM class_detail cd JOIN participant p ON cd.ParticipantID = p.ParticipantID JOIN class c ON cd.ClassID = c.ClassID JOIN subject s ON c.SubjectID = s.SubjectID JOIN instructor i on i.InstructorID=c.InstructorID GROUP BY s.SubjectName ORDER BY cd.ClassDetailID ASC;";
+	$sql = "SELECT cd.ClassDetailID, c.ClassID, s.SubjectName, i.InstructorName, c.ClassStart, COUNT(cd.ParticipantID) AS 'TotalParticipant' FROM class_detail cd JOIN participant p ON cd.ParticipantID = p.ParticipantID JOIN class c ON cd.ClassID = c.ClassID JOIN subject s ON c.SubjectID = s.SubjectID JOIN instructor i on i.InstructorID=c.InstructorID GROUP BY s.SubjectName ORDER BY cd.ClassDetailID ASC";
 	
 	//Mendapatkan Hasil
 	$r = mysqli_query($con,$sql);

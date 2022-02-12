@@ -6,7 +6,7 @@
 	require_once('../connection.php');
 	
 	//Membuat SQL Query
-	$sql = "SELECT * FROM class_detail cd JOIN participant p ON cd.ParticipantID = p.ParticipantID JOIN class c ON cd.ClassID = c.ClassID JOIN subject s ON c.SubjectID = s.SubjectID JOIN instructor i on i.InstructorID=c.InstructorID WHERE c.ClassID=$id;";
+	$sql = "SELECT * FROM class_detail cd JOIN participant p ON cd.ParticipantID = p.ParticipantID JOIN class c ON cd.ClassID = c.ClassID JOIN subject s ON c.SubjectID = s.SubjectID JOIN instructor i on i.InstructorID=c.InstructorID WHERE c.ClassID=$id";
 	
 	//Mendapatkan Hasil
 	$r = mysqli_query($con,$sql);

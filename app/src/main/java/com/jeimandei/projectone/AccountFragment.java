@@ -168,5 +168,7 @@ public class AccountFragment extends Fragment {
         alertDialog.setPositiveButton("Sure", null);
         AlertDialog dialog = alertDialog.create();
         dialog.show();
+
+
     }
 }

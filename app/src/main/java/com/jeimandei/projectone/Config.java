@@ -139,7 +139,7 @@ public class Config {
     public static String CLASSDETAIL_CLASSID_ID = "classdetailresult";
     public static String CLASSDETAIL_ID = "classdetailid";
 
-    public static final String URL_SHOW_DATE = "http://192.168.30.26/project/search/datebetween.php?start=";
+    public static final String URL_SHOW_DATE = "http://192.168.30.26/project/search/datebetween.php";
 
     public static final String TAG_JSON_ARRAY_DATE = "classdate";
     public static final String TAG_JSON_SUBJECTNAME_DATE = "classsubjectdate";
