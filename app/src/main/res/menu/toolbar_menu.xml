@@ -20,8 +20,12 @@
                 android:title="Search Subject"
                 app:showAsAction="never" />
         </menu>
-
     </item>
+    <item
+        android:id="@+id/toolbar_search_date"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Search Date"
+        app:showAsAction="never" />
 
 
 </menu>

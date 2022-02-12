@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchDateFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:orientation="horizontal">
+
+            <EditText android:id="@+id/datestartSearch"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Start Date"
+                android:layout_weight="1"
+                android:inputType="text"/>
+            <EditText android:id="@+id/dateendSearch"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="End Date"
+                android:layout_weight="1"
+                android:inputType="text"/>
+
+
+
+        </LinearLayout>
+
+        <!-- TODO: Update blank fragment layout -->
+        <Button
+            android:id="@+id/search_date_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:layout_gravity="center"
+            android:layout_margin="12dp"
+            android:backgroundTint="#9AD0EC"
+            />
+
+        <ListView
+            android:id="@+id/lv_datesearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     Toolbar toolbar;
     TextView n_name, n_email;
-    private MenuItem mmenu;
 
 
     @Override
@@ -40,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
         initView();
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
@@ -51,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         final Fragment[] fragments = {null};
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_search_24);
         switch (item.getItemId()){
             case R.id.toolbar_search_participant:
                 fragments[0] = new SearchParticipantFragment();
@@ -66,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.toolbar_search_class:
                 fragments[0] = new SearchClassFragment();
                 getSupportActionBar().setTitle("Search Class Subject");
+                callFragment(fragments[0]);
+                break;
+            case R.id.toolbar_search_date:
+                fragments[0] = new SearchDateFragment();
+                getSupportActionBar().setTitle("Search Class");
                 callFragment(fragments[0]);
                 break;
         }

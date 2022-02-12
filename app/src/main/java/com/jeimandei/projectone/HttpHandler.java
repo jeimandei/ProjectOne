@@ -1,5 +1,7 @@
 package com.jeimandei.projectone;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -89,6 +91,25 @@ public class HttpHandler {
         StringBuilder sb = new StringBuilder();
         try {
             URL url = new URL(responseUrl + id);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream())
+            );
+            String response;
+            while ((response = reader.readLine()) != null) {
+                sb.append(response + "\n");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return sb.toString();
+    }
+
+    public String sendGetRespDate(String responseUrl, String start, String end) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            URL url = new URL(responseUrl + start + "&end=" + end);
+            Log.d("url:", String.valueOf(url));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(connection.getInputStream())
