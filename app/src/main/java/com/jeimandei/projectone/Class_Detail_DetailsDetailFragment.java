@@ -186,7 +186,7 @@ public class Class_Detail_DetailsDetailFragment extends Fragment {
                     protected void onPostExecute(String s) {
                         super.onPostExecute(s);
                         loading.dismiss();
-                        Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Class Detail Updated!!!", Toast.LENGTH_LONG).show();
 
                         Class_Detail_DetailsFragment class_detail_detailsFragment = new Class_Detail_DetailsFragment();
                         FragmentManager fragmentManager = getFragmentManager();
@@ -421,7 +421,7 @@ public class Class_Detail_DetailsDetailFragment extends Fragment {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                Toast.makeText(getContext(), "Participant Deleted!!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Class Detail Deleted!!!", Toast.LENGTH_SHORT).show();
 
                 Class_Detail_DetailsFragment class_detail_detailsFragment = new Class_Detail_DetailsFragment();
                 FragmentManager fragmentManager = getFragmentManager();

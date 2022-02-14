@@ -202,8 +202,6 @@ public class Class_DetailFragment extends Fragment {
                 args.putString("id", classid);
                 class_detail_detailsFragment.setArguments(args);
 
-
-
                 Log.d("Par: ", String.valueOf(args));
                 fragmentTransaction.commit();
             }

@@ -29,8 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Name"
-            android:paddingTop="24dp"
-            android:inputType="text"/>
+            android:paddingTop="24dp"/>
 
         <EditText
             android:id="@+id/acc_email"

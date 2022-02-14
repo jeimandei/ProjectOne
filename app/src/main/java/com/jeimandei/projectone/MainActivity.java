@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.toolbar_search_date:
                 fragments[0] = new SearchDateFragment();
-                getSupportActionBar().setTitle("Search Class");
+                getSupportActionBar().setTitle("Search Class on Date");
                 callFragment(fragments[0]);
                 break;
         }

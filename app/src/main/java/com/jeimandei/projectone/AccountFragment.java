@@ -7,9 +7,13 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +59,8 @@ public class AccountFragment extends Fragment {
     private CircleImageView image;
     final Calendar calendar = Calendar.getInstance();
 
+    Toolbar toolbar;
+    private TextView n_name, n_email;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -101,6 +107,10 @@ public class AccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_account, container, false);
+        toolbar = viewGroup.findViewById(R.id.toolbar);
+        n_name = viewGroup.findViewById(R.id.nav_name);
+        n_email = viewGroup.findViewById(R.id.acc_email);
+
         image = viewGroup.findViewById(R.id.image);
         name = viewGroup.findViewById(R.id.acc_name);
         email = viewGroup.findViewById(R.id.acc_email);
@@ -145,6 +155,8 @@ public class AccountFragment extends Fragment {
                 int selectedId = gender.getCheckedRadioButtonId();
                 chk_gender = viewGroup.findViewById(selectedId);
 
+                //n_name.setText(name.getText().toString());
+
                 saveDialog();
             }
         });
@@ -171,4 +183,6 @@ public class AccountFragment extends Fragment {
 
 
     }
+
+
 }

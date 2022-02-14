@@ -162,7 +162,7 @@ public class ParticipantDetailFragment extends Fragment {
                     protected void onPostExecute(String s) {
                         super.onPostExecute(s);
                         loading.dismiss();
-                        Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Participant Updated!!!", Toast.LENGTH_LONG).show();
 
                         ParticipantFragment participantFragment = new ParticipantFragment();
                         FragmentManager fragmentManager = getFragmentManager();

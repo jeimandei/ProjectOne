@@ -127,7 +127,7 @@ public class CompanyDetailFragment extends Fragment {
                     protected void onPostExecute(String s) {
                         super.onPostExecute(s);
                         loading.dismiss();
-                        Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Company Updated!!!", Toast.LENGTH_LONG).show();
 
                         CompanyFragment companyFragment = new CompanyFragment();
                         FragmentManager fragmentManager = getFragmentManager();

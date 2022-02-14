@@ -146,4 +146,5 @@ public class Config {
     public static final String TAG_JSON_INSTRUCTORNAME_DATE = "classinstructordate";
     public static final String TAG_JSON_CLASSSTART_DATE = "classstartdate";
     public static final String TAG_JSON_CLASSEND_DATE = "classenddate";
+    public static String CLASSSEARCH_CLASSID_DATE = "classiddate";
 }

@@ -133,7 +133,7 @@ public class InstructorDetailFragment extends Fragment {
                     protected void onPostExecute(String s) {
                         super.onPostExecute(s);
                         loading.dismiss();
-                        Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Instructor Updated!!!", Toast.LENGTH_LONG).show();
                         Log.d("aa:", s);
 
                         InstructorFragment instructorFragment = new InstructorFragment();
@@ -245,7 +245,7 @@ public class InstructorDetailFragment extends Fragment {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                Toast.makeText(getContext(), "Subject Deleted!!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Instructor Deleted!!!", Toast.LENGTH_SHORT).show();
 
                 InstructorFragment instructorFragment = new InstructorFragment();
                 FragmentManager fragmentManager = getFragmentManager();

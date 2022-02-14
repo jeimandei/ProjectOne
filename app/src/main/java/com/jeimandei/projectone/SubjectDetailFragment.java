@@ -128,7 +128,7 @@ public class SubjectDetailFragment extends Fragment {
                     protected void onPostExecute(String s) {
                         super.onPostExecute(s);
                         loading.dismiss();
-                        Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Subject Updated!!!", Toast.LENGTH_LONG).show();
 
                         SubjectFragment subjectFragment = new SubjectFragment();
                         FragmentManager fragmentManager = getFragmentManager();
